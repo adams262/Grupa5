@@ -1,4 +1,4 @@
-Aplikacja generująca wniosi/podsumowanie po wklejeniu linku z yt
+Aplikacja generująca wnioski/podsumowanie so video, po wklejeniu linku z yt
 
 
 
