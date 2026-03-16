@@ -1,0 +1,16 @@
+* Program pisany jest w kodzie C#, XAML w MAUI. Tworzony jets głównie z myślą o urządzeniach
+mobinych Android.
+
+* Design UI/UX utworzony został w programie FIGMA, pózniej przeniesiony na aplikacje.
+
+* Program będzie używał paczki NuGet o nazwie "YouTube Explode", która ułatwia 
+i przyśpiesza wczytywanie treści z serwisu YouTube.
+  - Gotowa kompozycja funkcji ułatwiających pracę
+  - Gotowe funkcje do użytkowe w kodzie C#
+
+* Również działać będzie na zasadzie wczytywania API czat bota Gemini Studio,
+z uwagi na zaawansowany proces uczenia maszynowego, na nauke którego wymagane są duże połady czasowe.
+  - Przyśpiesza pracę nad projektem na potrzeby zadania.
+  - Działa po przez API Gemini co odciąża aplikacje
+  - Limitowane działanie aplikacji 
+  - Potrzeby promptowania dla poprawnego działania aplikacji
