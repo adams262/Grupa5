@@ -107,21 +107,92 @@
 
         <ScrollView IsVisible="{Binding IsResultVisible}">
             <VerticalStackLayout Padding="25" Spacing="20" HorizontalOptions="Fill" MaximumWidthRequest="500">
-                <Label Text="Wynik analizy:" 
-                       TextColor="DarkViolet" 
-                       FontSize="20" 
-                       FontAttributes="Bold">
-                </Label>
-                <Border StrokeShape="RoundRectangle 12" StrokeThickness="1" Stroke="{StaticResource Gray900}" HeightRequest="350" Padding="15">
-                    <ScrollView>
-                        <Label Text="{Binding TekstWynikowy}"
-                           TextColor="{StaticResource Gray200}"
-                           LineHeight="1.4"
-                           FontSize="15">
-                        </Label>
-                    </ScrollView>
-                </Border>
+                <Border StrokeShape="RoundRectangle 12" StrokeThickness="1" Stroke="{StaticResource Gray900}" BackgroundColor="{StaticResource Gray900}">
+                    <VerticalStackLayout>
+                        <Grid BackgroundColor="{StaticResource Gray950}" Padding="10,5">
+                            <Label Text="Wynik analizy:" 
+                                   TextColor="DarkViolet" 
+                                   FontSize="20" 
+                                   VerticalOptions="Center" 
+                                   Margin="5" 
+                                   FontAttributes="Bold"/>
+                            <HorizontalStackLayout HorizontalOptions="End" VerticalOptions="Center" Spacing="5">
+                                <ImageButton Command="{Binding SaveToFileCommand}"
+                                             HeightRequest="32"
+                                             WidthRequest="32"
+                                             Padding="6"
+                                             CornerRadius="6"
+                                             BackgroundColor="Transparent"
+                                             Opacity="0.7">
+                                    <ImageButton.Source>
+                                        <FontImageSource Glyph="&#xf019;" 
+                                                         FontFamily="FontAwesomeSolid" 
+                                                         Color="DarkViolet" 
+                                                         Size="18"/>
+                                    </ImageButton.Source>
+                                    <VisualStateManager.VisualStateGroups>
+                                        <VisualStateGroupList>
+                                            <VisualStateGroup Name="CommonStates">
+                                                <VisualState Name="Normal">
+                                                    <VisualState.Setters>
+                                                        <Setter Property="BackgroundColor" Value="Transparent" />
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                                <VisualState Name="PointerOver">
+                                                    <VisualState.Setters>
+                                                        <Setter Property="Opacity" Value="1" />
+                                                        <Setter Property="BackgroundColor" Value="#20FFFFFF" />
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateGroupList>
+                                    </VisualStateManager.VisualStateGroups>
+                                </ImageButton>
 
+                                <ImageButton Command="{Binding CopyToClipboardCommand}"
+                                             HeightRequest="32"
+                                             WidthRequest="32"
+                                             Padding="6"
+                                             CornerRadius="6"
+                                             BackgroundColor="Transparent"
+                                             Opacity="0.7">
+                                <ImageButton.Source>
+                                    <FontImageSource Glyph="&#xf0c5;" 
+                                                     FontFamily="FontAwesomeSolid" 
+                                                     Color="DarkViolet" 
+                                                     Size="18"/>
+                                </ImageButton.Source>
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroupList>
+                                        <VisualStateGroup Name="CommonStates">
+                                            <VisualState Name="Normal">
+                                                <VisualState.Setters>
+                                                    <Setter Property="BackgroundColor" Value="Transparent" />
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                            <VisualState Name="PointerOver">
+                                                <VisualState.Setters>
+                                                    <Setter Property="Opacity" Value="1" />
+                                                    <Setter Property="BackgroundColor" Value="#20FFFFFF" />
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                    </VisualStateGroupList>
+                                </VisualStateManager.VisualStateGroups>
+                            </ImageButton>
+                            </HorizontalStackLayout>
+                        </Grid>
+                        <ScrollView HeightRequest="350" Padding="15">
+                            <Label Text="{Binding TekstWynikowy}"
+                                   TextColor="{StaticResource Gray200}"
+                                   LineHeight="1.4"
+                                   FontSize="15"
+                                   HorizontalOptions="Fill">
+                            </Label>
+                        </ScrollView>
+
+                    </VerticalStackLayout>
+                </Border>
                 <Button Text="Wróć do konfiguracji" 
                         Command="{Binding BackToInputCommand}" 
                         BackgroundColor="DarkViolet" 

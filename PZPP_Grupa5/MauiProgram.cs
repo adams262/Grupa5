@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using CommunityToolkit.Maui;
+using Microsoft.Extensions.Logging;
+
 
 namespace PZPP_Grupa5
 {
@@ -9,10 +11,12 @@ namespace PZPP_Grupa5
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                    fonts.AddFont("Font Awesome 7 Free-Solid-900.otf", "FontAwesomeSolid");
                 });
 
 #if DEBUG
