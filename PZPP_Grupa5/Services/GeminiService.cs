@@ -16,7 +16,7 @@ namespace PZPP_Grupa5.Services
 
             if (string.IsNullOrWhiteSpace(apiKey))
             {
-                return "Błąd: Brak klucza API. Wprowadź go w ustawieniach aplikacji (ikona ≡ w lewym górnym rogu).";
+                return "Błąd: Brak klucza API. Wprowadź go w panelu bocznym aplikacji (ikona ≡ w lewym górnym rogu).";
             }
 
             string Url = $"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={apiKey}";
