@@ -104,6 +104,12 @@ namespace PZPP_Grupa5.Services
             var odpowiedz = await _httpClient.PostAsJsonAsync(Url, payload);
             var json = await odpowiedz.Content.ReadAsStringAsync();
 
+            if (!odpowiedz.IsSuccessStatusCode)
+            {
+                throw new Exception(json);
+            }
+
+
             try
             {
                 using var doc = JsonDocument.Parse(json);
@@ -123,9 +129,9 @@ namespace PZPP_Grupa5.Services
 
                 return wynik ?? "Brak odpowiedzi od Gemini AI Studio.";
             }
-            catch
+            catch (Exception ex)
             {
-                return "Error: Przetwarzanie odpowiedzi z Gemini AI Studio nie powiodło się. Możliwe, że materiał był za długi lub wystąpił błąd sieci. Odpowiedź: " + json;
+                throw new Exception("Błąd parsowania: " + json);
             }
         }
     }
