@@ -28,18 +28,22 @@ namespace PZPP_Grupa5.ViewModels
         }
 
         [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(ProcessVideoCommand))]
         private string videoUrl;
 
         [ObservableProperty]
         private string tekstWynikowy;
 
         [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(ProcessVideoCommand))]
         private bool chceStreszczenie;
 
         [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(ProcessVideoCommand))]
         private bool chceWniosek;
 
         [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(ProcessVideoCommand))]
         private bool chceTimestamps;
 
         [ObservableProperty]
@@ -63,7 +67,7 @@ namespace PZPP_Grupa5.ViewModels
         }
 
         // [[[ Komenda do przetwarzania wideo ]]]
-        [RelayCommand]
+        [RelayCommand(CanExecute = nameof(CanProcess))]
         private async Task ProcessVideo()
         {
             IsInputVisible = false;
@@ -108,6 +112,11 @@ namespace PZPP_Grupa5.ViewModels
                 IsLoading = false;
                 IsResultVisible = true;
             }
+        }
+
+        private bool CanProcess()
+        {
+            return !string.IsNullOrWhiteSpace(VideoUrl) && (ChceStreszczenie || ChceWniosek || ChceTimestamps);
         }
 
         private string ExplainError(string error)
