@@ -131,7 +131,7 @@ namespace PZPP_Grupa5.Services
             }
             catch (Exception ex)
             {
-                throw new Exception("Błąd parsowania: " + json);
+                return $"Błąd API Gemini: {ex.Message}";
             }
         }
     }

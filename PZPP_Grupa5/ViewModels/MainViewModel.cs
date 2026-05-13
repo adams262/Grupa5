@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-
 using CommunityToolkit.Maui.Storage;
 using CommunityToolkit.Maui.Alerts;  
 using CommunityToolkit.Maui.Core;    
@@ -93,6 +92,7 @@ namespace PZPP_Grupa5.ViewModels
                 if (!youtubeDane.CzyTylkoAudio && youtubeDane.Tekst.Contains("<style>"))
                 {
                     TekstWynikowy = "Błąd: YouTube zablokował pobieranie napisów. Spróbuj innego filmu.";
+                    IsLoading = false; IsResultVisible = true;
                     return;
                 }
 
