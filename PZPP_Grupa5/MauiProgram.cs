@@ -22,14 +22,14 @@ namespace PZPP_Grupa5
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
-            // [[[ Dependency Injection klienta YouTube ]]]
+            // Dependency Injection klienta YouTube
             builder.Services.AddSingleton<YoutubeExplode.YoutubeClient>();
 
-            // [[[ Rejestracja widoków i logiki UI ]]]
+            // Rejestracja widoków i logiki UI
             builder.Services.AddTransient<PZPP_Grupa5.ViewModels.MainViewModel>();
             builder.Services.AddTransient<PZPP_Grupa5.Views.MainPage>();
 
-            // [[[ Rejestracja serwisów ]]]
+            // Rejestracja serwisów
             builder.Services.AddSingleton<PZPP_Grupa5.Services.IYouTubeService, PZPP_Grupa5.Services.YouTubeService>();
             builder.Services.AddSingleton<PZPP_Grupa5.Services.IGeminiService, PZPP_Grupa5.Services.GeminiService>();
 

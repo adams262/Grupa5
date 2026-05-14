@@ -15,13 +15,11 @@ namespace PZPP_Grupa5.Services
             string apiKey = Preferences.Default.Get("GeminiApiKey", string.Empty);
 
             if (string.IsNullOrWhiteSpace(apiKey))
-            {
-                return "Błąd: Brak klucza API. Wprowadź go w panelu bocznym aplikacji (ikona ≡ w lewym górnym rogu).";
-            }
+                throw new ApiKeyException();
 
-            string Url = $"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={apiKey}";
+            string url = $"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={apiKey}";
 
-            // --- BUDOWANIE INTELIGENTNEGO PROMPTU ---
+            // budowanie promptu
             var promptBuilder = new StringBuilder();
             promptBuilder.AppendLine("Jesteś ekspertem od analizy treści. Twoim zadaniem jest przeanalizowanie dostarczonego materiału (transkrypcji lub audio) z YouTube.");
             promptBuilder.AppendLine("Odpowiadaj ZAWSZE w języku polskim.");
@@ -54,14 +52,7 @@ namespace PZPP_Grupa5.Services
 
             string finalnyPrompt = promptBuilder.ToString();
 
-            // Zabezpieczenie przed wysłaniem pustego żądania (gdy użytkownik nic nie zaznaczy)
-            if (!streszczenie && !wniosek && !timestamps)
-            {
-                return "Błąd: Wybierz co najmniej jedną opcję analizy przed przetworzeniem wideo.";
-            }
-
             object payload;
-
             // Pakowanie danych audio lub tekstowych
             if (dane.CzyTylkoAudio)
             {
@@ -101,25 +92,26 @@ namespace PZPP_Grupa5.Services
             }
 
             // Wysyłanie żądania do Gemini AI Studio
-            var odpowiedz = await _httpClient.PostAsJsonAsync(Url, payload);
+            var odpowiedz = await _httpClient.PostAsJsonAsync(url, payload);
             var json = await odpowiedz.Content.ReadAsStringAsync();
 
             if (!odpowiedz.IsSuccessStatusCode)
             {
-                throw new Exception(json);
+                var errorJson = JsonDocument.Parse(json);
+                var errorMessage = errorJson.RootElement
+                    .GetProperty("error")
+                    .GetProperty("message")
+                    .GetString() ?? json;
+                if (odpowiedz.StatusCode == System.Net.HttpStatusCode.BadRequest && json.Contains("API_KEY_INVALID"))
+                    throw new ApiKeyException(errorMessage);
+
+                throw new Exception(errorMessage);
             }
 
-
+            // parsowanie
             try
             {
                 using var doc = JsonDocument.Parse(json);
-
-                // Sprawdzanie, czy odpowiedź zawiera błąd po stronie API (np. zły klucz)
-                if (doc.RootElement.TryGetProperty("error", out JsonElement errorElement))
-                {
-                    var errorMessage = errorElement.GetProperty("message").GetString();
-                    return $"Błąd API Gemini: {errorMessage}";
-                }
 
                 var wynik = doc.RootElement
                     .GetProperty("candidates")[0]
@@ -131,7 +123,7 @@ namespace PZPP_Grupa5.Services
             }
             catch (Exception ex)
             {
-                return $"Błąd API Gemini: {ex.Message}";
+                return $"Błąd parsowania: {ex.Message}";
             }
         }
     }

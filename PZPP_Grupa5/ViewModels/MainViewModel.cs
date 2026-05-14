@@ -1,16 +1,17 @@
-﻿using CommunityToolkit.Mvvm;
+﻿using CommunityToolkit.Maui.Alerts;  
+using CommunityToolkit.Maui.Core;    
+using CommunityToolkit.Maui.Storage;
+using CommunityToolkit.Mvvm;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using CommunityToolkit.Maui.Storage;
-using CommunityToolkit.Maui.Alerts;  
-using CommunityToolkit.Maui.Core;    
+using PZPP_Grupa5.Models;
 using PZPP_Grupa5.Services;
-using System.Windows.Input; 
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading;
+using System.Windows.Input; 
 
 namespace PZPP_Grupa5.ViewModels
 {
@@ -19,7 +20,7 @@ namespace PZPP_Grupa5.ViewModels
         private readonly IYouTubeService _youtubeService;
         private readonly IGeminiService _geminiService;
 
-        // [[[ Dependency Injection serwisów YouTubeService i GeminiService ]]]
+        // Dependency Injection serwisów YouTubeService i GeminiService
         public MainViewModel(IYouTubeService youtubeService, IGeminiService geminiService)
         {
             _youtubeService = youtubeService;
@@ -54,7 +55,7 @@ namespace PZPP_Grupa5.ViewModels
         [ObservableProperty]
         private bool isResultVisible = false;
 
-
+        // Właściwość do przechowywania klucza API, z automatycznym zapisem i odczytem z ustawień aplikacji
         public string UserApiKey
         {
             get => Preferences.Default.Get("GeminiApiKey", string.Empty);
@@ -65,7 +66,7 @@ namespace PZPP_Grupa5.ViewModels
             }
         }
 
-        // [[[ Komenda do przetwarzania wideo ]]]
+        // Komenda do przetwarzania wideo
         [RelayCommand(CanExecute = nameof(CanProcess))]
         private async Task ProcessVideo()
         {
@@ -73,33 +74,27 @@ namespace PZPP_Grupa5.ViewModels
             IsLoading = true;
             IsResultVisible = false;
 
-
-            if (string.IsNullOrWhiteSpace(VideoUrl))
-            {
-                TekstWynikowy = "Proszę wprowadzić poprawny URL wideo z YouTube.";
-                IsLoading = false;
-                IsResultVisible = true;
-
-                return;
-            }
-
             try
             {
-                // [[[ Pobieranie danych z YouTube ]]]
+                // Pobieranie danych z YouTube
                 var youtubeDane = await _youtubeService.GetYouTubeAsync(VideoUrl);
                 TekstWynikowy = "Pobrano dane. Trwa analiza, proszę czekać...";
 
                 if (!youtubeDane.CzyTylkoAudio && youtubeDane.Tekst.Contains("<style>"))
                 {
                     TekstWynikowy = "Błąd: YouTube zablokował pobieranie napisów. Spróbuj innego filmu.";
-                    IsLoading = false; IsResultVisible = true;
                     return;
                 }
 
-                // [[[ Przetwarzanie danych przez Gemini AI Studio ]]]
+                // Przetwarzanie danych przez Gemini AI Studio
                 var wynikPrzetworzony = await _geminiService.GetGeminiAsync(youtubeDane, ChceStreszczenie, ChceWniosek, ChceTimestamps);
                 TekstWynikowy = wynikPrzetworzony;
 
+            }
+            catch (ApiKeyException)
+            {
+                TekstWynikowy = "Twój klucz API jest nieważny lub błędny. Sprawdź jego poprawność.";
+                System.Diagnostics.Debug.WriteLine("Błąd klucza API");
             }
             catch (Exception ex)
             {
@@ -114,6 +109,7 @@ namespace PZPP_Grupa5.ViewModels
             }
         }
 
+        // Metoda sprawdzająca, czy można przetworzyć wideo (czy jest podany URL i wybrana przynajmniej jedna opcja analizy)
         private bool CanProcess()
         {
             return !string.IsNullOrWhiteSpace(VideoUrl) && (ChceStreszczenie || ChceWniosek || ChceTimestamps);
@@ -122,27 +118,26 @@ namespace PZPP_Grupa5.ViewModels
         private string ExplainError(string error)
         {
             var e = error.ToLower();
-            if (e.Contains("api_key_invalid") || e.Contains("api key not valid") || e.Contains("400"))
-                return "Twój klucz API jest nieważny lub błędny. Sprawdź jego poprawność.";
 
             if (e.Contains("429") || e.Contains("quota") || e.Contains("limit"))
-                return "Wykorzystałeś darmowy limit zapytań. Poczekaj 60 sekund i spróbuh ponownie.";
+                return "Wykorzystałeś darmowy limit zapytań. Poczekaj 60 sekund i spróbuj ponownie.";
 
             if (e.Contains("overloaded") || e.Contains("503"))
                 return "Serwery Gemini są przeciążone. Spróbuj ponownie za chwilę.";
 
-            if (error.Contains("network") || error.Contains("connection"))
+            if (e.Contains("network") || error.Contains("connection"))
                 return "Problem z internetem. Sprawdź swoje połączenie.";
 
             if (e.Contains("safety") || e.Contains("blocked"))
                 return "AI uznało, że ten film jest zbyt kontrowersyjny i odmówiło analizy.";
 
-            if (e.Contains("invalid youtube video id") || e.Contains("invalid url"));
+            if (e.Contains("invalid youtube video id") || e.Contains("invalid url"))
                 return "Niepoprawny link do video. Sprawdź poprawność i wklej go jeszcze raz.";
 
             return "Wystąpił nieznany błąd, spróbuj ponownie";
         }
 
+        //powrót do ekranu wprowadzania danych
         [RelayCommand]
         private void BackToInput()
         {
@@ -151,6 +146,7 @@ namespace PZPP_Grupa5.ViewModels
             IsInputVisible = true;
         }
 
+        //zapisywanie rezultatu do pliku tekstowego
         [RelayCommand]
         private async Task SaveToFile()
         {
@@ -174,6 +170,7 @@ namespace PZPP_Grupa5.ViewModels
             }
         }
 
+        //kopiowanie rezultatu do schowka
         [RelayCommand]
         private async Task CopyToClipboard()
         {
