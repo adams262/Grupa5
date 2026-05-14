@@ -55,6 +55,15 @@ namespace PZPP_Grupa5.ViewModels
         [ObservableProperty]
         private bool isResultVisible = false;
 
+        [ObservableProperty]
+        private string videoTitle;
+
+        [ObservableProperty]
+        private string videoThumbnailUrl;
+
+        [ObservableProperty]
+        private bool isVideoInfoVisible;
+
         // Właściwość do przechowywania klucza API, z automatycznym zapisem i odczytem z ustawień aplikacji
         public string UserApiKey
         {
@@ -73,9 +82,26 @@ namespace PZPP_Grupa5.ViewModels
             IsInputVisible = false;
             IsLoading = true;
             IsResultVisible = false;
+            IsVideoInfoVisible = false;
 
             try
-            {
+            {   // Pobieranie tytułu i miniatury wideo z YouTube (niezależnie od dalszej analizy, aby nie przerywać procesu w przypadku błędu z miniaturą)
+                try
+                {
+                    var youtube = new YoutubeExplode.YoutubeClient();
+                    var video = await youtube.Videos.GetAsync(VideoUrl);
+                    VideoTitle = video.Title;
+                    VideoThumbnailUrl = video.Thumbnails.OrderByDescending(t => t.Resolution.Width).FirstOrDefault()?.Url;
+                    IsVideoInfoVisible = true;
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine(ex.Message);
+                    VideoThumbnailUrl = "no_image_available.jpg";
+                    VideoTitle = "Nie udało się pobrać tytułu";
+                    IsVideoInfoVisible= true;
+                }
+
                 // Pobieranie danych z YouTube
                 var youtubeDane = await _youtubeService.GetYouTubeAsync(VideoUrl);
                 TekstWynikowy = "Pobrano dane. Trwa analiza, proszę czekać...";
