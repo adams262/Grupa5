@@ -99,7 +99,7 @@ namespace PZPP_Grupa5.ViewModels
                     System.Diagnostics.Debug.WriteLine(ex.Message);
                     VideoThumbnailUrl = "no_image_available.jpg";
                     VideoTitle = "Nie udało się pobrać tytułu";
-                    IsVideoInfoVisible= true;
+                    IsVideoInfoVisible = true;
                 }
 
                 // Pobieranie danych z YouTube
@@ -121,6 +121,18 @@ namespace PZPP_Grupa5.ViewModels
             {
                 TekstWynikowy = "Twój klucz API jest nieważny lub błędny. Sprawdź jego poprawność.";
                 System.Diagnostics.Debug.WriteLine("Błąd klucza API");
+            }
+            catch (QuotaExceededException)
+            {
+                TekstWynikowy = "Wykorzystałeś darmowy limit zapytań. Poczekaj 60 sekund i spróbuj ponownie.";
+            }
+            catch (ServerOverloadedException)
+            {
+                TekstWynikowy = "Serwery Gemini są przeciążone. Spróbuj ponownie za chwilę.";
+            }
+            catch (InvalidYoutubeUrlException)
+            {
+                TekstWynikowy = "Niepoprawny link do video. Sprawdź poprawność i wklej go jeszcze raz.";
             }
             catch (Exception ex)
             {
@@ -145,20 +157,11 @@ namespace PZPP_Grupa5.ViewModels
         {
             var e = error.ToLower();
 
-            if (e.Contains("429") || e.Contains("quota") || e.Contains("limit"))
-                return "Wykorzystałeś darmowy limit zapytań. Poczekaj 60 sekund i spróbuj ponownie.";
-
-            if (e.Contains("overloaded") || e.Contains("503"))
-                return "Serwery Gemini są przeciążone. Spróbuj ponownie za chwilę.";
-
             if (e.Contains("network") || error.Contains("connection"))
                 return "Problem z internetem. Sprawdź swoje połączenie.";
 
             if (e.Contains("safety") || e.Contains("blocked"))
                 return "AI uznało, że ten film jest zbyt kontrowersyjny i odmówiło analizy.";
-
-            if (e.Contains("invalid youtube video id") || e.Contains("invalid url"))
-                return "Niepoprawny link do video. Sprawdź poprawność i wklej go jeszcze raz.";
 
             return "Wystąpił nieznany błąd, spróbuj ponownie";
         }

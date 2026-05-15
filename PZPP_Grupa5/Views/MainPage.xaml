@@ -44,7 +44,7 @@
                                HorizontalOptions="Center"
                                Margin="0,30,0,10"/>
 
-                        
+
 
                         <Border StrokeShape="RoundRectangle 12" StrokeThickness="0" BackgroundColor="{StaticResource Gray900}" Padding="15">
                             <VerticalStackLayout Spacing="10">
@@ -89,7 +89,26 @@
                                 CornerRadius="12"
                                 HeightRequest="60"
                                 WidthRequest="200"
-                                HorizontalOptions="Center"/>
+                                HorizontalOptions="Center">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroupList>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal">
+                                            <VisualState.Setters>
+                                                <Setter Property="BackgroundColor" Value="DarkViolet"/>
+                                                <Setter Property="Opacity" Value="1"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="Disabled">
+                                            <VisualState.Setters>
+                                                <Setter Property="BackgroundColor" Value="Gray"/>
+                                                <Setter Property="Opacity" Value="0.5"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateGroupList>
+                            </VisualStateManager.VisualStateGroups>
+                        </Button>
                     </VerticalStackLayout>
                 </ScrollView>
 

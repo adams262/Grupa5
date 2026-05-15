@@ -94,7 +94,8 @@ namespace PZPP_Grupa5.Services
             // Wysyłanie żądania do Gemini AI Studio
             var odpowiedz = await _httpClient.PostAsJsonAsync(url, payload);
             var json = await odpowiedz.Content.ReadAsStringAsync();
-
+            
+            // obsługa błędów
             if (!odpowiedz.IsSuccessStatusCode)
             {
                 var errorJson = JsonDocument.Parse(json);
@@ -102,8 +103,15 @@ namespace PZPP_Grupa5.Services
                     .GetProperty("error")
                     .GetProperty("message")
                     .GetString() ?? json;
+
                 if (odpowiedz.StatusCode == System.Net.HttpStatusCode.BadRequest && json.Contains("API_KEY_INVALID"))
                     throw new ApiKeyException(errorMessage);
+
+                if (odpowiedz.StatusCode == System.Net.HttpStatusCode.TooManyRequests)
+                    throw new QuotaExceededException();
+
+                if (odpowiedz.StatusCode == System.Net.HttpStatusCode.ServiceUnavailable)
+                    throw new ServerOverloadedException();
 
                 throw new Exception(errorMessage);
             }

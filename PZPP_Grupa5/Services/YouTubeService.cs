@@ -19,8 +19,17 @@ namespace PZPP_Grupa5.Services
 
 
         public async Task<YouTubeDependency> GetYouTubeAsync(string videoUrl)
-        {
-            var videoId = YoutubeExplode.Videos.VideoId.Parse(videoUrl);
+        {   
+            // Walidacja URL
+            VideoId videoId;
+            try
+            {
+                videoId = VideoId.Parse(videoUrl);
+            }
+            catch
+            {
+                throw new InvalidYoutubeUrlException();
+            }
 
             // Pobieranie manifestu napisow
             var trackManifest = await _youtube.Videos.ClosedCaptions.GetManifestAsync(videoId);
