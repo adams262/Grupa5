@@ -1,0 +1,214 @@
+﻿using CommunityToolkit.Maui.Alerts;  
+using CommunityToolkit.Maui.Core;    
+using CommunityToolkit.Maui.Storage;
+using CommunityToolkit.Mvvm;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using PZPP_Grupa5.Models;
+using PZPP_Grupa5.Services;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Text;
+using System.Threading;
+using System.Windows.Input; 
+
+namespace PZPP_Grupa5.ViewModels
+{
+    public partial class MainViewModel : ObservableObject
+    {
+        private readonly IYouTubeService _youtubeService;
+        private readonly IGeminiService _geminiService;
+
+        // Dependency Injection serwisów YouTubeService i GeminiService
+        public MainViewModel(IYouTubeService youtubeService, IGeminiService geminiService)
+        {
+            _youtubeService = youtubeService;
+            _geminiService = geminiService;
+        }
+
+        [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(ProcessVideoCommand))]
+        private string videoUrl;
+
+        [ObservableProperty]
+        private string tekstWynikowy;
+
+        [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(ProcessVideoCommand))]
+        private bool chceStreszczenie;
+
+        [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(ProcessVideoCommand))]
+        private bool chceWniosek;
+
+        [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(ProcessVideoCommand))]
+        private bool chceTimestamps;
+
+        [ObservableProperty]
+        private bool isInputVisible = true;
+
+        [ObservableProperty]
+        private bool isLoading = false;
+
+        [ObservableProperty]
+        private bool isResultVisible = false;
+
+        [ObservableProperty]
+        private string videoTitle;
+
+        [ObservableProperty]
+        private string videoThumbnailUrl;
+
+        [ObservableProperty]
+        private bool isVideoInfoVisible;
+
+        // Właściwość do przechowywania klucza API, z automatycznym zapisem i odczytem z ustawień aplikacji
+        public string UserApiKey
+        {
+            get => Preferences.Default.Get("GeminiApiKey", string.Empty);
+            set
+            {
+                Preferences.Default.Set("GeminiApiKey", value);
+                OnPropertyChanged();
+            }
+        }
+
+        // Komenda do przetwarzania wideo
+        [RelayCommand(CanExecute = nameof(CanProcess))]
+        private async Task ProcessVideo()
+        {
+            IsInputVisible = false;
+            IsLoading = true;
+            IsResultVisible = false;
+            IsVideoInfoVisible = false;
+
+            try
+            {   // Pobieranie tytułu i miniatury wideo z YouTube (niezależnie od dalszej analizy, aby nie przerywać procesu w przypadku błędu z miniaturą)
+                try
+                {
+                    var youtube = new YoutubeExplode.YoutubeClient();
+                    var video = await youtube.Videos.GetAsync(VideoUrl);
+                    VideoTitle = video.Title;
+                    VideoThumbnailUrl = video.Thumbnails.OrderByDescending(t => t.Resolution.Width).FirstOrDefault()?.Url;
+                    IsVideoInfoVisible = true;
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine(ex.Message);
+                    VideoThumbnailUrl = "no_image_available.jpg";
+                    VideoTitle = "Nie udało się pobrać tytułu";
+                    IsVideoInfoVisible = true;
+                }
+
+                // Pobieranie danych z YouTube
+                var youtubeDane = await _youtubeService.GetYouTubeAsync(VideoUrl);
+                TekstWynikowy = "Pobrano dane. Trwa analiza, proszę czekać...";
+
+                if (!youtubeDane.CzyTylkoAudio && youtubeDane.Tekst.Contains("<style>"))
+                {
+                    TekstWynikowy = "Błąd: YouTube zablokował pobieranie napisów. Spróbuj innego filmu.";
+                    return;
+                }
+
+                // Przetwarzanie danych przez Gemini AI Studio
+                var wynikPrzetworzony = await _geminiService.GetGeminiAsync(youtubeDane, ChceStreszczenie, ChceWniosek, ChceTimestamps);
+                TekstWynikowy = wynikPrzetworzony;
+
+            }
+            catch (ApiKeyException)
+            {
+                TekstWynikowy = "Twój klucz API jest nieważny lub błędny. Sprawdź jego poprawność.";
+                System.Diagnostics.Debug.WriteLine("Błąd klucza API");
+            }
+            catch (QuotaExceededException)
+            {
+                TekstWynikowy = "Wykorzystałeś darmowy limit zapytań. Poczekaj 60 sekund i spróbuj ponownie.";
+            }
+            catch (ServerOverloadedException)
+            {
+                TekstWynikowy = "Serwery Gemini są przeciążone. Spróbuj ponownie za chwilę.";
+            }
+            catch (InvalidYoutubeUrlException)
+            {
+                TekstWynikowy = "Niepoprawny link do video. Sprawdź poprawność i wklej go jeszcze raz.";
+            }
+            catch (Exception ex)
+            {
+                TekstWynikowy = ExplainError(ex.Message);
+
+                System.Diagnostics.Debug.WriteLine($"Pełny błąd API: {ex.Message}");
+            }
+            finally
+            {
+                IsLoading = false;
+                IsResultVisible = true;
+            }
+        }
+
+        // Metoda sprawdzająca, czy można przetworzyć wideo (czy jest podany URL i wybrana przynajmniej jedna opcja analizy)
+        private bool CanProcess()
+        {
+            return !string.IsNullOrWhiteSpace(VideoUrl) && (ChceStreszczenie || ChceWniosek || ChceTimestamps);
+        }
+
+        private string ExplainError(string error)
+        {
+            var e = error.ToLower();
+
+            if (e.Contains("network") || error.Contains("connection"))
+                return "Problem z internetem. Sprawdź swoje połączenie.";
+
+            if (e.Contains("safety") || e.Contains("blocked"))
+                return "AI uznało, że ten film jest zbyt kontrowersyjny i odmówiło analizy.";
+
+            return "Wystąpił nieznany błąd, spróbuj ponownie";
+        }
+
+        //powrót do ekranu wprowadzania danych
+        [RelayCommand]
+        private void BackToInput()
+        {
+            IsResultVisible = false;
+            IsLoading = false;
+            IsInputVisible = true;
+        }
+
+        //zapisywanie rezultatu do pliku tekstowego
+        [RelayCommand]
+        private async Task SaveToFile()
+        {
+            if (string.IsNullOrWhiteSpace(TekstWynikowy))
+                return;
+
+            try
+            {
+                using var stream = new MemoryStream(Encoding.UTF8.GetBytes(TekstWynikowy));
+
+                var fileSaverResult = await FileSaver.Default.SaveAsync("Analiza_Gemini.txt", stream, CancellationToken.None);
+
+                if (fileSaverResult.IsSuccessful)
+                {
+                    await Shell.Current.DisplayAlert("Pobieranie", "Wynik został pobrany pomyślnie", "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                await Shell.Current.DisplayAlert("Błąd", "Nie udało się zapisać pliku: " + ex.Message, "OK");
+            }
+        }
+
+        //kopiowanie rezultatu do schowka
+        [RelayCommand]
+        private async Task CopyToClipboard()
+        {
+            if (string.IsNullOrWhiteSpace(TekstWynikowy))
+            {
+                return;
+            }
+            await Clipboard.Default.SetTextAsync(TekstWynikowy);
+            await Shell.Current.DisplayAlert("Kopiowanie", "Wynik został skopiowany do schowka", "OK");
+        }
+    }
+}
