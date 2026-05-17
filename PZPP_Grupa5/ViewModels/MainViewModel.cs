@@ -64,6 +64,9 @@ namespace PZPP_Grupa5.ViewModels
         [ObservableProperty]
         private bool isVideoInfoVisible;
 
+        [ObservableProperty]
+        private string _themeIcon = "\uf186";
+
         // Właściwość do przechowywania klucza API, z automatycznym zapisem i odczytem z ustawień aplikacji
         public string UserApiKey
         {
@@ -209,6 +212,19 @@ namespace PZPP_Grupa5.ViewModels
             }
             await Clipboard.Default.SetTextAsync(TekstWynikowy);
             await Shell.Current.DisplayAlert("Kopiowanie", "Wynik został skopiowany do schowka", "OK");
+        }
+
+        // Zmiana motywu
+        [RelayCommand]
+        private void ToggleTheme()
+        {
+            if (Application.Current.UserAppTheme == AppTheme.Dark)
+               Application.Current.UserAppTheme = AppTheme.Light;
+
+            else
+                Application.Current.UserAppTheme = AppTheme.Dark;
+
+            ThemeIcon = Application.Current.UserAppTheme == AppTheme.Dark ? "\uf186;" : "\uf185;";
         }
     }
 }
