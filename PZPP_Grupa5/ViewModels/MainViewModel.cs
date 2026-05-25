@@ -163,8 +163,9 @@ namespace PZPP_Grupa5.ViewModels
             if (e.Contains("network") || error.Contains("connection"))
                 return "Problem z internetem. Sprawdź swoje połączenie.";
 
-            if (e.Contains("safety") || e.Contains("blocked"))
-                return "AI uznało, że ten film jest zbyt kontrowersyjny i odmówiło analizy.";
+    
+    if (e.Contains("overloaded") || e.Contains("503"))
+        return "Serwery Gemini są przeciążone. Spróbuj ponownie za chwilę.";
 
             return "Wystąpił nieznany błąd, spróbuj ponownie";
         }
