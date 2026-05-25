@@ -1,17 +1,17 @@
-﻿using CommunityToolkit.Mvvm;
+﻿using CommunityToolkit.Maui.Alerts;  
+using CommunityToolkit.Maui.Core;    
+using CommunityToolkit.Maui.Storage;
+using CommunityToolkit.Mvvm;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-
-using CommunityToolkit.Maui.Storage;
-using CommunityToolkit.Maui.Alerts;  
-using CommunityToolkit.Maui.Core;    
+using PZPP_Grupa5.Models;
 using PZPP_Grupa5.Services;
-using System.Windows.Input; 
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading;
+using System.Windows.Input; 
 
 namespace PZPP_Grupa5.ViewModels
 {
@@ -20,7 +20,7 @@ namespace PZPP_Grupa5.ViewModels
         private readonly IYouTubeService _youtubeService;
         private readonly IGeminiService _geminiService;
 
-        // [[[ Dependency Injection serwisów YouTubeService i GeminiService ]]]
+        // Dependency Injection serwisów YouTubeService i GeminiService
         public MainViewModel(IYouTubeService youtubeService, IGeminiService geminiService)
         {
             _youtubeService = youtubeService;
@@ -28,18 +28,22 @@ namespace PZPP_Grupa5.ViewModels
         }
 
         [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(ProcessVideoCommand))]
         private string videoUrl;
 
         [ObservableProperty]
         private string tekstWynikowy;
 
         [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(ProcessVideoCommand))]
         private bool chceStreszczenie;
 
         [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(ProcessVideoCommand))]
         private bool chceWniosek;
 
         [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(ProcessVideoCommand))]
         private bool chceTimestamps;
 
         [ObservableProperty]
@@ -51,7 +55,19 @@ namespace PZPP_Grupa5.ViewModels
         [ObservableProperty]
         private bool isResultVisible = false;
 
+        [ObservableProperty]
+        private string videoTitle;
 
+        [ObservableProperty]
+        private string videoThumbnailUrl;
+
+        [ObservableProperty]
+        private bool isVideoInfoVisible;
+
+        [ObservableProperty]
+        private string _themeIcon = "\uf186";
+
+        // Właściwość do przechowywania klucza API, z automatycznym zapisem i odczytem z ustawień aplikacji
         public string UserApiKey
         {
             get => Preferences.Default.Get("GeminiApiKey", string.Empty);
@@ -62,27 +78,34 @@ namespace PZPP_Grupa5.ViewModels
             }
         }
 
-        // [[[ Komenda do przetwarzania wideo ]]]
-        [RelayCommand]
+        // Komenda do przetwarzania wideo
+        [RelayCommand(CanExecute = nameof(CanProcess))]
         private async Task ProcessVideo()
         {
             IsInputVisible = false;
             IsLoading = true;
             IsResultVisible = false;
-
-
-            if (string.IsNullOrWhiteSpace(VideoUrl))
-            {
-                TekstWynikowy = "Proszę wprowadzić poprawny URL wideo z YouTube.";
-                IsLoading = false;
-                IsResultVisible = true;
-
-                return;
-            }
+            IsVideoInfoVisible = false;
 
             try
-            {
-                // [[[ Pobieranie danych z YouTube ]]]
+            {   // Pobieranie tytułu i miniatury wideo z YouTube (niezależnie od dalszej analizy, aby nie przerywać procesu w przypadku błędu z miniaturą)
+                try
+                {
+                    var youtube = new YoutubeExplode.YoutubeClient();
+                    var video = await youtube.Videos.GetAsync(VideoUrl);
+                    VideoTitle = video.Title;
+                    VideoThumbnailUrl = video.Thumbnails.OrderByDescending(t => t.Resolution.Width).FirstOrDefault()?.Url;
+                    IsVideoInfoVisible = true;
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine(ex.Message);
+                    VideoThumbnailUrl = "no_image_available.jpg";
+                    VideoTitle = "Nie udało się pobrać tytułu";
+                    IsVideoInfoVisible = true;
+                }
+
+                // Pobieranie danych z YouTube
                 var youtubeDane = await _youtubeService.GetYouTubeAsync(VideoUrl);
                 TekstWynikowy = "Pobrano dane. Trwa analiza, proszę czekać...";
 
@@ -92,10 +115,27 @@ namespace PZPP_Grupa5.ViewModels
                     return;
                 }
 
-                // [[[ Przetwarzanie danych przez Gemini AI Studio ]]]
+                // Przetwarzanie danych przez Gemini AI Studio
                 var wynikPrzetworzony = await _geminiService.GetGeminiAsync(youtubeDane, ChceStreszczenie, ChceWniosek, ChceTimestamps);
                 TekstWynikowy = wynikPrzetworzony;
 
+            }
+            catch (ApiKeyException)
+            {
+                TekstWynikowy = "Twój klucz API jest nieważny lub błędny. Sprawdź jego poprawność.";
+                System.Diagnostics.Debug.WriteLine("Błąd klucza API");
+            }
+            catch (QuotaExceededException)
+            {
+                TekstWynikowy = "Wykorzystałeś darmowy limit zapytań. Poczekaj 60 sekund i spróbuj ponownie.";
+            }
+            catch (ServerOverloadedException)
+            {
+                TekstWynikowy = "Serwery Gemini są przeciążone. Spróbuj ponownie za chwilę.";
+            }
+            catch (InvalidYoutubeUrlException)
+            {
+                TekstWynikowy = "Niepoprawny link do video. Sprawdź poprawność i wklej go jeszcze raz.";
             }
             catch (Exception ex)
             {
@@ -110,38 +150,27 @@ namespace PZPP_Grupa5.ViewModels
             }
         }
 
-       private string ExplainError(string error)
-{
-    var e = error.ToLower();
+        // Metoda sprawdzająca, czy można przetworzyć wideo (czy jest podany URL i wybrana przynajmniej jedna opcja analizy)
+        private bool CanProcess()
+        {
+            return !string.IsNullOrWhiteSpace(VideoUrl) && (ChceStreszczenie || ChceWniosek || ChceTimestamps);
+        }
 
-    
-    if (e.Contains("network") || e.Contains("connection") || e.Contains("unreachable"))
-        return "Problem z internetem. Sprawdź swoje połączenie.";
+        private string ExplainError(string error)
+        {
+            var e = error.ToLower();
 
-    
-    if (e.Contains("api_key_invalid") || e.Contains("api key not valid") || e.Contains("400"))
-        return "Twój klucz API jest nieważny lub błędny. Sprawdź jego poprawność.";
-
-    
-    if (e.Contains("429") || e.Contains("quota") || e.Contains("limit"))
-        return "Wykorzystałeś darmowy limit zapytań. Poczekaj 60 sekund i spróbuj ponownie.";
+            if (e.Contains("network") || error.Contains("connection"))
+                return "Problem z internetem. Sprawdź swoje połączenie.";
 
     
     if (e.Contains("overloaded") || e.Contains("503"))
         return "Serwery Gemini są przeciążone. Spróbuj ponownie za chwilę.";
 
-   
-    if (e.Contains("safety") || e.Contains("blocked"))
-        return "AI uznało, że ten film jest zbyt kontrowersyjny i odmówiło analizy.";
+            return "Wystąpił nieznany błąd, spróbuj ponownie";
+        }
 
-    
-    if (e.Contains("invalid youtube video id") || e.Contains("invalid url"))
-        return "Niepoprawny link do video. Sprawdź poprawność i wklej go jeszcze raz.";
-
-    
-    return "Wystąpił nieznany błąd, spróbuj ponownie";
-}
-
+        //powrót do ekranu wprowadzania danych
         [RelayCommand]
         private void BackToInput()
         {
@@ -150,6 +179,7 @@ namespace PZPP_Grupa5.ViewModels
             IsInputVisible = true;
         }
 
+        //zapisywanie rezultatu do pliku tekstowego
         [RelayCommand]
         private async Task SaveToFile()
         {
@@ -173,6 +203,7 @@ namespace PZPP_Grupa5.ViewModels
             }
         }
 
+        //kopiowanie rezultatu do schowka
         [RelayCommand]
         private async Task CopyToClipboard()
         {
@@ -182,6 +213,19 @@ namespace PZPP_Grupa5.ViewModels
             }
             await Clipboard.Default.SetTextAsync(TekstWynikowy);
             await Shell.Current.DisplayAlert("Kopiowanie", "Wynik został skopiowany do schowka", "OK");
+        }
+
+        // Zmiana motywu
+        [RelayCommand]
+        private void ToggleTheme()
+        {
+            if (Application.Current.UserAppTheme == AppTheme.Dark)
+               Application.Current.UserAppTheme = AppTheme.Light;
+
+            else
+                Application.Current.UserAppTheme = AppTheme.Dark;
+
+            ThemeIcon = Application.Current.UserAppTheme == AppTheme.Dark ? "\uf186;" : "\uf185;";
         }
     }
 }

@@ -19,14 +19,23 @@ namespace PZPP_Grupa5.Services
 
 
         public async Task<YouTubeDependency> GetYouTubeAsync(string videoUrl)
-        {
-            var videoId = YoutubeExplode.Videos.VideoId.Parse(videoUrl);
+        {   
+            // Walidacja URL
+            VideoId videoId;
+            try
+            {
+                videoId = VideoId.Parse(videoUrl);
+            }
+            catch
+            {
+                throw new InvalidYoutubeUrlException();
+            }
 
-            // [[[ Pobieranie manifestu napisow ]]]
+            // Pobieranie manifestu napisow
             var trackManifest = await _youtube.Videos.ClosedCaptions.GetManifestAsync(videoId);
             var trackInfo = trackManifest.TryGetByLanguage("pl") ?? trackManifest.Tracks.FirstOrDefault();
 
-            // [[[ Pobieramy napisy i zwracamy sam tekst, jesli sa dostepne ]]]
+            // Pobieramy napisy i zwracamy sam tekst, jesli sa dostepne
             if (trackInfo != null)
             {
                 var track = await _youtube.Videos.ClosedCaptions.GetAsync(trackInfo);
@@ -35,11 +44,11 @@ namespace PZPP_Grupa5.Services
                 return new YouTubeDependency { Tekst = pelnyTekst, CzyTylkoAudio = false };
             }
 
-            // [[[ Pobieramy plik audio ]]]
+            // Pobieramy plik audio
             var streamManifest = await _youtube.Videos.Streams.GetManifestAsync(videoId);
             var audioStreamInfo = streamManifest.GetAudioOnlyStreams().GetWithHighestBitrate();
 
-            // [[[ Pobieramy i zapisujemy plik audio w katalogu tymczasowym ]]]
+            // Pobieramy i zapisujemy plik audio w katalogu tymczasowym
             var filePath = Path.Combine(FileSystem.CacheDirectory, $"{videoId}.mp4");
 
             await _youtube.Videos.Streams.DownloadAsync(audioStreamInfo, filePath);
