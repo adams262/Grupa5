@@ -17,8 +17,8 @@ namespace TestProject4
         [Fact]
         public async Task FullIntegration_ProcessVideo_PobieraZYoutubeIAnalizujeWGemini()
         {
-            // 1. Arrange (Przygotowanie)
-            // Wczytujemy klucz z pliku appsettings.json
+            // Arrange
+            
             var config = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json")
@@ -42,12 +42,11 @@ namespace TestProject4
             viewModel.VideoUrl = "https://www.youtube.com/watch?v=jNQXAC9IVRw";
             viewModel.ChceStreszczenie = true;
 
-            // 2. Act (Działanie)
+            // Act 
             await viewModel.ProcessVideoCommand.ExecuteAsync(null);
 
-            // 3. Assert (Sprawdzenie)
-            // Jeśli test dojdzie do tego miejsca bez rzucenia błędu (np. 401 Unauthorized), 
-            // to znaczy, że integracja działa poprawnie!
+            // Assert
+            
             Assert.False(viewModel.IsLoading);
             Assert.True(viewModel.IsResultVisible);
             Assert.NotNull(viewModel.TekstWynikowy);

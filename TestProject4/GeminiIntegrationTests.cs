@@ -14,7 +14,7 @@ namespace TestProject4
 
         public GeminiIntegrationTests()
         {
-            // Budujemy konfigurację z pliku json
+            
             var config = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json")

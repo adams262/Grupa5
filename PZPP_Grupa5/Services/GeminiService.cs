@@ -2,7 +2,7 @@
 using System.Net.Http.Json;
 using System.Text.Json;
 using System.Text;
-using Microsoft.Maui.Storage; // Dodane dla interfejsu IPreferences
+using Microsoft.Maui.Storage; 
 
 namespace PZPP_Grupa5.Services
 {
@@ -11,8 +11,7 @@ namespace PZPP_Grupa5.Services
         private readonly HttpClient _httpClient;
         private readonly IPreferences _preferences;
 
-        // ZMIANA: Konstruktor przyjmujący interfejsy. 
-        // W głównej aplikacji użyje domyślnych (null), a w testach podamy własne.
+        
         public GeminiService(HttpClient? httpClient = null, IPreferences? preferences = null)
         {
             _httpClient = httpClient ?? new HttpClient();
@@ -21,7 +20,7 @@ namespace PZPP_Grupa5.Services
 
         public async Task<string> GetGeminiAsync(YouTubeDependency dane, bool streszczenie, bool wniosek, bool timestamps)
         {
-            // ZMIANA: Zamiast Preferences.Default.Get używamy _preferences.Get
+            
             string apiKey = _preferences.Get("GeminiApiKey", string.Empty);
 
             if (string.IsNullOrWhiteSpace(apiKey))
@@ -101,7 +100,7 @@ namespace PZPP_Grupa5.Services
                 };
             }
 
-            // ZMIANA: Wysyłanie żądania przez _httpClient
+            
             var odpowiedz = await _httpClient.PostAsJsonAsync(url, payload);
             var json = await odpowiedz.Content.ReadAsStringAsync();
 
