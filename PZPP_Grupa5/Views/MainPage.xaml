@@ -42,7 +42,7 @@
                     <Border.GestureRecognizers>
                         <PointerGestureRecognizer PointerEntered="OnPointerEntered" PointerExited="OnPointerExited" />
                     </Border.GestureRecognizers>
-                    <Button Clicked="OnHamburgerClicked" Pressed="OnElementPressed" Released="OnElementReleased" Text="&#xf0c9;" FontFamily="FontAwesomeSolid" TextColor="#FF0000" FontSize="20" BackgroundColor="Transparent" BorderWidth="0" Padding="0" Margin="0" />
+                    <Button Clicked="OnHamburgerClicked" Pressed="OnElementPressed" Released="OnElementReleased" Text="&#xf0c9;" FontFamily="Font Awesome 7 Free" TextColor="#FF0000" FontSize="20" BackgroundColor="Transparent" BorderWidth="0" Padding="0" Margin="0" />
                 </Border>
 
                 <Border StrokeShape="RoundRectangle 8" StrokeThickness="0" BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#2A2A2A}" HorizontalOptions="End" WidthRequest="40" HeightRequest="40" Padding="0">
@@ -52,7 +52,7 @@
                     <Border.GestureRecognizers>
                         <PointerGestureRecognizer PointerEntered="OnPointerEntered" PointerExited="OnPointerExited" />
                     </Border.GestureRecognizers>
-                    <Button Command="{Binding ToggleThemeCommand}" Pressed="OnElementPressed" Released="OnElementReleased" Text="{Binding ThemeIcon}" FontFamily="FontAwesomeSolid" TextColor="#FF0000" FontSize="20" BackgroundColor="Transparent" BorderWidth="0" Padding="0" Margin="0" />
+                    <Button Command="{Binding ToggleThemeCommand}" Pressed="OnElementPressed" Released="OnElementReleased" Text="{Binding ThemeIcon}" FontFamily="Font Awesome 7 Free" TextColor="#FF0000" FontSize="20" BackgroundColor="Transparent" BorderWidth="0" Padding="0" Margin="0" />
                 </Border>
             </Grid>
 
@@ -160,7 +160,7 @@
                                             <Border.GestureRecognizers>
                                                 <PointerGestureRecognizer PointerEntered="OnPointerEntered" PointerExited="OnPointerExited" />
                                             </Border.GestureRecognizers>
-                                            <Button Command="{Binding SaveToFileCommand}" Pressed="OnElementPressed" Released="OnElementReleased" Text="&#xf019;" FontFamily="FontAwesomeSolid" TextColor="#FF0000" FontSize="16" BackgroundColor="Transparent" BorderWidth="0" Padding="0" Margin="0" />
+                                            <Button Command="{Binding SaveToFileCommand}" Pressed="OnElementPressed" Released="OnElementReleased" Text="&#xf019;" FontFamily="Font Awesome 7 Free" TextColor="#FF0000" FontSize="16" BackgroundColor="Transparent" BorderWidth="0" Padding="0" Margin="0" />
                                         </Border>
 
                                         <Border StrokeShape="RoundRectangle 8" StrokeThickness="0" BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#333333}" WidthRequest="36" HeightRequest="36" Padding="0">
@@ -170,7 +170,7 @@
                                             <Border.GestureRecognizers>
                                                 <PointerGestureRecognizer PointerEntered="OnPointerEntered" PointerExited="OnPointerExited" />
                                             </Border.GestureRecognizers>
-                                            <Button Command="{Binding CopyToClipboardCommand}" Pressed="OnElementPressed" Released="OnElementReleased" Text="&#xf0c5;" FontFamily="FontAwesomeSolid" TextColor="#FF0000" FontSize="16" BackgroundColor="Transparent" BorderWidth="0" Padding="0" Margin="0" />
+                                            <Button Command="{Binding CopyToClipboardCommand}" Pressed="OnElementPressed" Released="OnElementReleased" Text="&#xf0c5;" FontFamily="Font Awesome 7 Free" TextColor="#FF0000" FontSize="16" BackgroundColor="Transparent" BorderWidth="0" Padding="0" Margin="0" />
                                         </Border>
                                     </HorizontalStackLayout>
                                 </Grid>
@@ -207,7 +207,7 @@
                         <Border.GestureRecognizers>
                             <PointerGestureRecognizer PointerEntered="OnPointerEntered" PointerExited="OnPointerExited" />
                         </Border.GestureRecognizers>
-                        <Button Clicked="OnOverlayTapped" Pressed="OnElementPressed" Released="OnElementReleased" Text="&#xf060;" FontFamily="FontAwesomeSolid" TextColor="#FF0000" FontSize="20" BackgroundColor="Transparent" BorderWidth="0" Padding="0" Margin="0" />
+                        <Button Clicked="OnOverlayTapped" Pressed="OnElementPressed" Released="OnElementReleased" Text="&#xf060;" FontFamily="Font Awesome 7 Free" TextColor="#FF0000" FontSize="20" BackgroundColor="Transparent" BorderWidth="0" Padding="0" Margin="0" />
                     </Border>
 
                     <Border Grid.Row="2" StrokeShape="RoundRectangle 12" StrokeThickness="2" BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#2A2A2A}" Padding="15" Margin="5,0,5,25">
@@ -259,7 +259,7 @@
         Pressed="OnElementPressed"
         Released="OnElementReleased"
         Text="&#xf1f8;" 
-        FontFamily="FontAwesomeSolid" 
+        FontFamily="Font Awesome 7 Free" 
         TextColor="#FF0000" 
         FontSize="18" 
         BackgroundColor="Transparent" 
