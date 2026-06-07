@@ -25,42 +25,35 @@
     </ContentPage.Resources>
 
     <ContentPage.Background>
-        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-            <GradientStop Color="{AppThemeBinding Light=#F5F0FF, Dark=#0D0D0D}" Offset="0.1" />
-            <GradientStop Color="{AppThemeBinding Light=#EDE0FF, Dark=#1A0B2E}" Offset="1.0" />
+        <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+            <GradientStop Color="{AppThemeBinding Light=#f2f2f2, Dark=#212121}" Offset="0.2" />
+            <GradientStop Color="{AppThemeBinding Light=#d2f2fc, Dark=#fa1111}" Offset="2.5" />
         </LinearGradientBrush>
     </ContentPage.Background>
 
     <Grid>
         <Grid RowDefinitions="Auto, *">
             <Grid Grid.Row="0" Padding="15,15,15,0" HorizontalOptions="Fill">
-                <ImageButton Clicked="OnHamburgerClicked"
-                             HeightRequest="40"
-                             WidthRequest="40"
-                             HorizontalOptions="Start"
-                             BackgroundColor="Transparent"
-                             ToolTipProperties.Text="Menu">
-                    <ImageButton.Source>
-                        <FontImageSource Glyph="&#xf0c9;" 
-                                         FontFamily="FontAwesomeSolid" 
-                                         Color="DarkViolet" 
-                                         Size="24"/>
-                    </ImageButton.Source>
-                </ImageButton>
-                <ImageButton Command="{Binding ToggleThemeCommand}"
-                             HeightRequest="40"
-                             WidthRequest="40"
-                             HorizontalOptions="End"
-                             BackgroundColor="Transparent">
-                    <ImageButton.Source>
-                        <FontImageSource Glyph="{Binding ThemeIcon}" 
-                                         FontFamily="FontAwesomeSolid" 
-                                         Color="DarkViolet" 
-                                         Size="24"/>
-                    </ImageButton.Source>
-                </ImageButton>
 
+                <Border StrokeShape="RoundRectangle 8" StrokeThickness="0" BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#2A2A2A}" HorizontalOptions="Start" WidthRequest="40" HeightRequest="40" Padding="0">
+                    <Border.Shadow>
+                        <Shadow Brush="Black" Offset="4,4" Radius="10" Opacity="0.3" />
+                    </Border.Shadow>
+                    <Border.GestureRecognizers>
+                        <PointerGestureRecognizer PointerEntered="OnPointerEntered" PointerExited="OnPointerExited" />
+                    </Border.GestureRecognizers>
+                    <Button Clicked="OnHamburgerClicked" Pressed="OnElementPressed" Released="OnElementReleased" Text="&#xf0c9;" FontFamily="Font Awesome 7 Free" TextColor="#FF0000" FontSize="20" BackgroundColor="Transparent" BorderWidth="0" Padding="0" Margin="0" />
+                </Border>
 
+                <Border StrokeShape="RoundRectangle 8" StrokeThickness="0" BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#2A2A2A}" HorizontalOptions="End" WidthRequest="40" HeightRequest="40" Padding="0">
+                    <Border.Shadow>
+                        <Shadow Brush="Black" Offset="4,4" Radius="10" Opacity="0.3" />
+                    </Border.Shadow>
+                    <Border.GestureRecognizers>
+                        <PointerGestureRecognizer PointerEntered="OnPointerEntered" PointerExited="OnPointerExited" />
+                    </Border.GestureRecognizers>
+                    <Button Command="{Binding ToggleThemeCommand}" Pressed="OnElementPressed" Released="OnElementReleased" Text="{Binding ThemeIcon}" FontFamily="Font Awesome 7 Free" TextColor="#FF0000" FontSize="20" BackgroundColor="Transparent" BorderWidth="0" Padding="0" Margin="0" />
+                </Border>
             </Grid>
 
             <Grid Grid.Row="1">
@@ -68,39 +61,48 @@
                     <VerticalStackLayout Padding="25" Spacing="25" HorizontalOptions="Fill" MaximumWidthRequest="500">
                         <Label Text="AI-NALISER" FontSize="32" FontAttributes="Bold" TextColor="#FF0000" HorizontalOptions="Center" Margin="0,30,0,10"/>
 
-                        <Border StrokeShape="RoundRectangle 12" StrokeThickness="0" BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#212121}" Padding="15">
+                        <Border StrokeShape="RoundRectangle 12" StrokeThickness="2" BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#212121}" Padding="20">
+                            <Border.GestureRecognizers>
+                                <PointerGestureRecognizer PointerEntered="OnPointerEntered" PointerExited="OnPointerExited" />
+                            </Border.GestureRecognizers>
+                            <Border.Stroke>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                    <GradientStop Color="{AppThemeBinding Light=#E0D0F0, Dark=#151515}" Offset="0.0" />
+                                    <GradientStop Color="{AppThemeBinding Light=#E0D0F0, Dark=#FF0000}" Offset="1.0" />
+                                </LinearGradientBrush>
+                            </Border.Stroke>
                             <VerticalStackLayout Spacing="10">
-                                <Label Text="Link do filmu z Youtube:" 
-                                       TextColor="DarkViolet" 
-                                       FontSize="20"
-                                       FontAttributes="Bold"/>
-                                <Entry Placeholder="https://www.youtube.com/..."
-                                       Text="{Binding VideoUrl}"
-                                       TextColor="{AppThemeBinding Light=#1A0B2E, Dark=White}"
-                                       PlaceholderColor="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray600}}"
-                                       ClearButtonVisibility="WhileEditing" />
+                                <Label Text="LINK" TextColor="#FF0000" FontSize="20" FontAttributes="Bold"/>
+                                <Entry Placeholder="https://www.youtube.com/..." Text="{Binding VideoUrl}" TextColor="{AppThemeBinding Light=#1A0B2E, Dark=White}" PlaceholderColor="Gray" ClearButtonVisibility="WhileEditing" />
                             </VerticalStackLayout>
                         </Border>
 
-                        <Border StrokeShape="RoundRectangle 12" StrokeThickness="0" BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#212121}"  Padding="20">
+                        <Border StrokeShape="RoundRectangle 12" StrokeThickness="2" BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#212121}" Padding="20">
+                            <Border.GestureRecognizers>
+                                <PointerGestureRecognizer PointerEntered="OnPointerEntered" PointerExited="OnPointerExited" />
+                            </Border.GestureRecognizers>
+                            <Border.Stroke>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                    <GradientStop Color="{AppThemeBinding Light=#E0D0F0, Dark=#151515}" Offset="0.0" />
+                                    <GradientStop Color="{AppThemeBinding Light=#E0D0F0, Dark=#FF0000}" Offset="1.0" />
+                                </LinearGradientBrush>
+                            </Border.Stroke>
                             <VerticalStackLayout Spacing="15">
                                 <Label Text="OPTIONS" TextColor="#FF0000" FontSize="20" FontAttributes="Bold" Margin="0,0,0,5"/>
                                 <HorizontalStackLayout Spacing="15">
-                                    <CheckBox IsChecked="{Binding ChceStreszczenie}" Color="DarkViolet" />
-                                    <Label Text="Skrócony opis" VerticalOptions="Center" TextColor="{AppThemeBinding Light=#1A0B2E, Dark=White}" />
+                                    <CheckBox IsChecked="{Binding ChceStreszczenie}" Color="#FF0000" />
+                                    <Label Text="SUMMARY" VerticalOptions="Center" TextColor="{AppThemeBinding Light=#1A0B2E, Dark=White}" />
                                 </HorizontalStackLayout>
                                 <HorizontalStackLayout Spacing="15">
-                                    <CheckBox IsChecked="{Binding ChceWniosek}" Color="DarkViolet" />
-                                    <Label Text="Kluczowe wnioski" VerticalOptions="Center" TextColor="{AppThemeBinding Light=#1A0B2E, Dark=White}" />
+                                    <CheckBox IsChecked="{Binding ChceWniosek}" Color="#FF0000" />
+                                    <Label Text="TAKEAWAYS" VerticalOptions="Center" TextColor="{AppThemeBinding Light=#1A0B2E, Dark=White}" />
                                 </HorizontalStackLayout>
                                 <HorizontalStackLayout Spacing="15">
-                                    <CheckBox IsChecked="{Binding ChceTimestamps}" Color="DarkViolet" />
-                                    <Label Text="Ważne punkty (Timestamps)" VerticalOptions="Center" TextColor="{AppThemeBinding Light=#1A0B2E, Dark=White}" />
+                                    <CheckBox IsChecked="{Binding ChceTimestamps}" Color="#FF0000" />
+                                    <Label Text="TIMESTAMPS" VerticalOptions="Center" TextColor="{AppThemeBinding Light=#1A0B2E, Dark=White}" />
                                 </HorizontalStackLayout>
                             </VerticalStackLayout>
                         </Border>
-                        
-                        
 
                         <Button Text="PROCESS VIDEO" Command="{Binding ProcessVideoCommand}" Pressed="OnElementPressed" Released="OnElementReleased" BackgroundColor="#FF0000" TextColor="White" FontAttributes="Bold" CornerRadius="12" HeightRequest="60" WidthRequest="200" HorizontalOptions="Center">
                             <Button.GestureRecognizers>
@@ -110,18 +112,9 @@
                     </VerticalStackLayout>
                 </ScrollView>
 
-                <VerticalStackLayout IsVisible="{Binding IsLoading}" VerticalOptions="Center" HorizontalOptions="Fill" Spacing="30" MaximumWidthRequest="500">
-                    <ActivityIndicator IsRunning="{Binding IsLoading}" Color="DarkViolet" HeightRequest="120" WidthRequest="120"></ActivityIndicator>
-                    <Label Text="Trwa analiza materiału..." 
-                           TextColor="{AppThemeBinding Light=#1A0B2E, Dark=White}" 
-                           FontSize="22" 
-                           HorizontalOptions="Center" 
-                           FontAttributes="Bold">
-                    </Label>
-                    <Label Text="Gemini przetwarza dane, proszę czekać." 
-                           TextColor="{AppThemeBinding Light={StaticResource Gray500}, Dark=Gray}" 
-                           HorizontalOptions="Center">
-                    </Label>
+                <VerticalStackLayout IsVisible="{Binding IsLoading}" VerticalOptions="Center" HorizontalOptions="Fill" Spacing="30">
+                    <ActivityIndicator IsRunning="{Binding IsLoading}" Color="#FF0000" HeightRequest="120" WidthRequest="120" />
+                    <Label Text="Trwa analiza materiału..." TextColor="{AppThemeBinding Light=#1A0B2E, Dark=White}" FontSize="22" HorizontalOptions="Center" FontAttributes="Bold" />
                 </VerticalStackLayout>
 
                 <ScrollView x:Name="ResultView" IsVisible="{Binding IsResultVisible}" ZIndex="1">
@@ -150,32 +143,14 @@
        HorizontalOptions="Fill"
        TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
                             </Border>
-                            <Label Text="{Binding VideoTitle}" 
-                                   HorizontalTextAlignment="Center"
-                                   FontAttributes="Bold"
-                                   FontSize="14"
-                                   TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray200}}"
-                                   WidthRequest="400"
-                                   LineBreakMode="WordWrap"/>
+
+                           
                         </VerticalStackLayout>
 
-                        <Border StrokeShape="RoundRectangle 12" StrokeThickness="1" Stroke="{AppThemeBinding Light=#E0D0F0, Dark={StaticResource Gray900}}"
-                                BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#212121}">
+                        <Border StrokeShape="RoundRectangle 12" StrokeThickness="0" BackgroundColor="{AppThemeBinding Light=White, Dark=#212121}">
                             <VerticalStackLayout>
-                                <Grid BackgroundColor="{AppThemeBinding Light=#E8D5FF, Dark={StaticResource Gray950}}" Padding="10,5">
-                                    <Label Text="Wynik analizy:" 
-                                           TextColor="DarkViolet" 
-                                           FontSize="20" 
-                                           VerticalOptions="Center" 
-                                           Margin="5" 
-                                           FontAttributes="Bold"/>
-                                    <HorizontalStackLayout HorizontalOptions="End" VerticalOptions="Center" Spacing="5">
-                                        <ImageButton Command="{Binding SaveToFileCommand}"
-                                                     HeightRequest="32" WidthRequest="32" Padding="6" CornerRadius="6" BackgroundColor="Transparent" Opacity="0.7">
-                                            <ImageButton.Source>
-                                                <FontImageSource Glyph="&#xf019;" FontFamily="FontAwesomeSolid" Color="DarkViolet" Size="18"/>
-                                            </ImageButton.Source>
-                                        </ImageButton>
+                                <Grid BackgroundColor="{AppThemeBinding Light=#FFE5E5, Dark=#2A2A2A}" Padding="15,10">
+                                    <Label Text="ANALYSIS RESULT" TextColor="#FF0000" FontSize="20" VerticalOptions="Center" FontAttributes="Bold"/>
 
                                     <HorizontalStackLayout HorizontalOptions="End" Spacing="10" VerticalOptions="Center">
                                         <Border StrokeShape="RoundRectangle 8" StrokeThickness="0" BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#333333}" WidthRequest="36" HeightRequest="36" Padding="0">
@@ -199,13 +174,8 @@
                                         </Border>
                                     </HorizontalStackLayout>
                                 </Grid>
-                                <ScrollView HeightRequest="350" Padding="15">
-                                    <Label Text="{Binding TekstWynikowy}"
-                                           TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray200}}"
-                                           LineHeight="1.4"
-                                           FontSize="15"
-                                           HorizontalOptions="Fill">
-                                    </Label>
+                                <ScrollView HeightRequest="300" Padding="15">
+                                    <Label Text="{Binding TekstWynikowy}" TextColor="{AppThemeBinding Light=Black, Dark=White}" LineHeight="1.4" />
                                 </ScrollView>
                             </VerticalStackLayout>
                         </Border>
@@ -226,16 +196,19 @@
             </BoxView.GestureRecognizers>
         </BoxView>
 
-        <Grid x:Name="SidebarMenu" 
-              BackgroundColor="{AppThemeBinding Light=#F5F0FF, Dark={StaticResource Gray950}}"  
-              WidthRequest="300" 
-              HorizontalOptions="Start" 
-              TranslationX="-300">
+        <Grid x:Name="SidebarMenu" BackgroundColor="{AppThemeBinding Light=#F5F0FF, Dark=#212121}" WidthRequest="300" HorizontalOptions="Start" TranslationX="-300">
+            <Border StrokeShape="RoundRectangle 0,15,15,0" StrokeThickness="0" BackgroundColor="{AppThemeBinding Light=#F5F0FF, Dark=#212121}">
+                <Grid RowDefinitions="Auto, Auto, Auto, Auto, *" Padding="20">
 
-            <Border StrokeShape="RoundRectangle 0,15,15,0" 
-                    StrokeThickness="1" 
-                    Stroke="{AppThemeBinding Light=#E0D0F0, Dark={StaticResource Gray900}}"
-                    BackgroundColor="{AppThemeBinding Light=#F5F0FF, Dark={StaticResource Gray950}}">
+                    <Border Grid.Row="0" StrokeShape="RoundRectangle 8" StrokeThickness="0" BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#2A2A2A}" HorizontalOptions="End" WidthRequest="40" HeightRequest="40" Margin="0,0,0,20" Padding="0">
+                        <Border.Shadow>
+                            <Shadow Brush="Black" Offset="4,4" Radius="10" Opacity="0.3" />
+                        </Border.Shadow>
+                        <Border.GestureRecognizers>
+                            <PointerGestureRecognizer PointerEntered="OnPointerEntered" PointerExited="OnPointerExited" />
+                        </Border.GestureRecognizers>
+                        <Button Clicked="OnOverlayTapped" Pressed="OnElementPressed" Released="OnElementReleased" Text="&#xf060;" FontFamily="Font Awesome 7 Free" TextColor="#FF0000" FontSize="20" BackgroundColor="Transparent" BorderWidth="0" Padding="0" Margin="0" />
+                    </Border>
 
                     <Border Grid.Row="2" StrokeShape="RoundRectangle 12" StrokeThickness="2" BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#2A2A2A}" Padding="15" Margin="5,0,5,25">
                         <Border.Shadow>
@@ -258,24 +231,18 @@
 
                     <Label Grid.Row="3" Text="CHAT HISTORY" TextColor="#FF0000" FontSize="20" FontAttributes="Bold" Margin="5,0,0,5"/>
 
-                    <BoxView HeightRequest="1" Color="{AppThemeBinding Light=#E0D0F0, Dark={StaticResource Gray900}}" />
+                    <CollectionView Grid.Row="4" ItemsSource="{Binding HistoriaCzatow}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="0" />
+                        </CollectionView.ItemsLayout>
 
-                    <Border StrokeShape="RoundRectangle 12" StrokeThickness="0" BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark={StaticResource Gray900}}" Padding="15">
-                        <VerticalStackLayout Spacing="10">
-                            <Label Text="Klucz API Gemini:" 
-                                   TextColor="DarkViolet" 
-                                   FontSize="20" 
-                                   FontAttributes="Bold"/>
-                            <Entry Placeholder="Wklej swój klucz api AI studio..."
-                                   Text="{Binding UserApiKey}"
-                                   TextColor="{AppThemeBinding Light=#1A0B2E, Dark=White}"
-                                   PlaceholderColor="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}" />
-                            <Label Text="Klucz jest zapisywany lokalnie w urządzeniu."
-                                   FontSize="10" 
-                                   TextColor="{AppThemeBinding Light={StaticResource Gray500}, Dark=Gray}" 
-                                   HorizontalOptions="End"/>
-                        </VerticalStackLayout>
-                    </Border>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Padding="8,8,15,15">
+                                    <Border StrokeShape="RoundRectangle 12" StrokeThickness="0" BackgroundColor="{AppThemeBinding Light=White, Dark=#2A2A2A}" Padding="15">
+                                        <Border.Shadow>
+                                            <Shadow Brush="Black" Offset="4,4" Radius="10" Opacity="0.3" />
+                                        </Border.Shadow>
 
                                         <Grid ColumnDefinitions="*, Auto">
 
