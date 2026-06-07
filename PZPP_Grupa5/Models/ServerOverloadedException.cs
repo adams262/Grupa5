@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PZPP_Grupa5.Models
 {
-    public class ServerOverloadedException : Exception
+    internal class ServerOverloadedException : Exception
     {
     }
 }

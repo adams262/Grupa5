@@ -174,9 +174,8 @@ namespace PZPP_Grupa5.ViewModels
             if (e.Contains("network") || error.Contains("connection"))
                 return "Problem z internetem. Sprawdź swoje połączenie.";
 
-    
-    if (e.Contains("overloaded") || e.Contains("503"))
-        return "Serwery Gemini są przeciążone. Spróbuj ponownie za chwilę.";
+            if (e.Contains("safety") || e.Contains("blocked"))
+                return "AI uznało, że ten film jest zbyt kontrowersyjny i odmówiło analizy.";
 
             if (e.Contains("overloaded") || e.Contains("503"))
                 return "Serwery Gemini są przeciążone. Spróbuj ponownie za chwilę.";
@@ -233,12 +232,108 @@ namespace PZPP_Grupa5.ViewModels
         private void ToggleTheme()
         {
             if (Application.Current.UserAppTheme == AppTheme.Dark)
-               Application.Current.UserAppTheme = AppTheme.Light;
-
+                Application.Current.UserAppTheme = AppTheme.Light;
             else
                 Application.Current.UserAppTheme = AppTheme.Dark;
 
             ThemeIcon = Application.Current.UserAppTheme == AppTheme.Dark ? "\uf186;" : "\uf185;";
+        }
+
+        // --- LOGIKA HISTORII CZATÓW ---
+        private void WczytajZapisanaHistorie()
+        {
+            try
+            {
+                var savedHistory = Preferences.Default.Get("ChatHistoryJson", string.Empty);
+                if (!string.IsNullOrWhiteSpace(savedHistory))
+                {
+                    var items = JsonSerializer.Deserialize<List<ChatHistoryItem>>(savedHistory);
+                    if (items != null)
+                    {
+                        HistoriaCzatow.Clear();
+                        foreach (var item in items)
+                        {
+                            HistoriaCzatow.Add(item);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Błąd podczas wczytywania historii: {ex.Message}");
+            }
+        }
+
+        private void ZapiszDoHistorii(string tytul, string wynik, string miniatura, string url)
+        {
+            var newItem = new ChatHistoryItem
+            {
+                TytulWideo = string.IsNullOrWhiteSpace(tytul) ? "Nieznane wideo" : tytul,
+                DataUtworzenia = DateTime.Now,
+                TekstWynikowy = wynik,
+                VideoThumbnailUrl = miniatura,
+                VideoUrl = url
+            };
+
+            HistoriaCzatow.Insert(0, newItem);
+
+            try
+            {
+                var itemsToSave = HistoriaCzatow.Take(20).ToList();
+                var json = JsonSerializer.Serialize(itemsToSave);
+                Preferences.Default.Set("ChatHistoryJson", json);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Błąd zapisu historii: {ex.Message}");
+            }
+        }
+
+        [RelayCommand]
+        private void WczytajHistorie(ChatHistoryItem wybranaHistoria)
+        {
+            if (wybranaHistoria == null) return;
+
+            VideoTitle = wybranaHistoria.TytulWideo;
+            TekstWynikowy = wybranaHistoria.TekstWynikowy;
+            VideoThumbnailUrl = wybranaHistoria.VideoThumbnailUrl;
+            VideoUrl = wybranaHistoria.VideoUrl;
+
+            IsVideoInfoVisible = true;
+            IsInputVisible = false;
+            IsLoading = false;
+            IsResultVisible = true;
+        }
+
+        [RelayCommand]
+        private void UsunHistorie(ChatHistoryItem itemDoUsuniecia)
+        {
+            if (itemDoUsuniecia != null && HistoriaCzatow.Contains(itemDoUsuniecia))
+            {
+                // Usuwamy z widoku
+                HistoriaCzatow.Remove(itemDoUsuniecia);
+
+                // Aktualizujemy zapis w pamięci telefonu/komputera
+                try
+                {
+                    var itemsToSave = HistoriaCzatow.ToList();
+                    var json = JsonSerializer.Serialize(itemsToSave);
+                    Preferences.Default.Set("ChatHistoryJson", json);
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"Błąd podczas usuwania historii: {ex.Message}");
+                }
+            }
+        }
+
+        [RelayCommand]
+        private async Task OtworzLinkWideo()
+        {
+            if (!string.IsNullOrWhiteSpace(VideoUrl))
+            {
+                await Launcher.Default.OpenAsync(VideoUrl);
+            }
         }
     }
 }
