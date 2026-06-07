@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PZPP_Grupa5</name>
+    </assembly>
+    <members>
+        <member name="T:PZPP_Grupa5.ViewModels.MainViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:PZPP_Grupa5.ViewModels.MainViewModel.VideoUrl">
+            <inheritdoc cref="F:PZPP_Grupa5.ViewModels.MainViewModel.videoUrl"/>
+        </member>
+        <member name="P:PZPP_Grupa5.ViewModels.MainViewModel.TekstWynikowy">
+            <inheritdoc cref="F:PZPP_Grupa5.ViewModels.MainViewModel.tekstWynikowy"/>
+        </member>
+        <member name="P:PZPP_Grupa5.ViewModels.MainViewModel.ChceStreszczenie">
+            <inheritdoc cref="F:PZPP_Grupa5.ViewModels.MainViewModel.chceStreszczenie"/>
+        </member>
+        <member name="P:PZPP_Grupa5.ViewModels.MainViewModel.ChceWniosek">
+            <inheritdoc cref="F:PZPP_Grupa5.ViewModels.MainViewModel.chceWniosek"/>
+        </member>
+        <member name="P:PZPP_Grupa5.ViewModels.MainViewModel.ChceTimestamps">
+            <inheritdoc cref="F:PZPP_Grupa5.ViewModels.MainViewModel.chceTimestamps"/>
+        </member>
+        <member name="F:PZPP_Grupa5.ViewModels.MainViewModel.processVideoCommand">
+            <summary>The backing field for <see cref="P:PZPP_Grupa5.ViewModels.MainViewModel.ProcessVideoCommand"/>.</summary>
+        </member>
+        <member name="P:PZPP_Grupa5.ViewModels.MainViewModel.ProcessVideoCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:PZPP_Grupa5.ViewModels.MainViewModel.ProcessVideoAsync"/>.</summary>
+        </member>
+        <member name="T:PZPP_Grupa5.Resource">
+            <summary>
+            Android Resource Designer class.
+            Exposes the Android Resource designer assembly into the project Namespace.
+            </summary>
+        </member>
+        <member name="T:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs">
+            <summary>
+            A helper type providing cached, reusable <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instances
+            for all properties generated with <see cref="T:CommunityToolkit.Mvvm.ComponentModel.ObservablePropertyAttribute"/>.
+            </summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.VideoUrl">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "VideoUrl" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.TekstWynikowy">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "TekstWynikowy" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ChceStreszczenie">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ChceStreszczenie" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ChceWniosek">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ChceWniosek" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ChceTimestamps">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ChceTimestamps" generated properties.</summary>
+        </member>
+        <member name="T:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs">
+            <summary>
+            A helper type providing cached, reusable <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instances
+            for all properties generated with <see cref="T:CommunityToolkit.Mvvm.ComponentModel.ObservablePropertyAttribute"/>.
+            </summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.VideoUrl">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "VideoUrl" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.TekstWynikowy">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "TekstWynikowy" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ChceStreszczenie">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ChceStreszczenie" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ChceWniosek">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ChceWniosek" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ChceTimestamps">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ChceTimestamps" generated properties.</summary>
+        </member>
+    </members>
+</doc>

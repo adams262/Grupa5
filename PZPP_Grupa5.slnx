@@ -1,3 +1,6 @@
 <Solution>
-  <Project Path="PZPP_Grupa5/PZPP_Grupa5.csproj" />
+  <Project Path="PZPP_Grupa5/PZPP_Grupa5.csproj">
+    <Deploy Solution="Debug|*" />
+  </Project>
+  <Project Path="TestProject4/TestProject4.csproj" Id="5b9d4a53-eb17-4aa7-b1bb-6f28332b6f13" />
 </Solution>

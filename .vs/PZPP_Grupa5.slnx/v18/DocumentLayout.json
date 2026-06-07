@@ -1,0 +1,38 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\kozin\\Documents\\PTG projekty\\ZPP\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{46ED1477-80A9-8660-5BD3-8BFC9A5FA724}|PZPP_Grupa5\\PZPP_Grupa5.csproj|c:\\users\\kozin\\documents\\ptg projekty\\zpp\\pzpp_grupa5\\mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{46ED1477-80A9-8660-5BD3-8BFC9A5FA724}|PZPP_Grupa5\\PZPP_Grupa5.csproj|solutionrelative:pzpp_grupa5\\mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MauiProgram.cs",
+              "DocumentMoniker": "C:\\Users\\kozin\\Documents\\PTG projekty\\ZPP\\PZPP_Grupa5\\MauiProgram.cs",
+              "RelativeDocumentMoniker": "PZPP_Grupa5\\MauiProgram.cs",
+              "ToolTip": "C:\\Users\\kozin\\Documents\\PTG projekty\\ZPP\\PZPP_Grupa5\\MauiProgram.cs",
+              "RelativeToolTip": "PZPP_Grupa5\\MauiProgram.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-07T17:23:42.731Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
