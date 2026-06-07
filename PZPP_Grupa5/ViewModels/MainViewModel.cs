@@ -23,16 +23,13 @@ namespace PZPP_Grupa5.ViewModels
         private readonly IYouTubeService _youtubeService;
         private readonly IGeminiService _geminiService;
 
-        // Kolekcja przechowująca historię czatów
         public ObservableCollection<ChatHistoryItem> HistoriaCzatow { get; set; } = new();
 
-        // Dependency Injection serwisów YouTubeService i GeminiService
         public MainViewModel(IYouTubeService youtubeService, IGeminiService geminiService)
         {
             _youtubeService = youtubeService;
             _geminiService = geminiService;
 
-            // Wczytanie zapisanej historii podczas uruchamiania aplikacji
             WczytajZapisanaHistorie();
         }
 
@@ -76,7 +73,6 @@ namespace PZPP_Grupa5.ViewModels
         [ObservableProperty]
         private string _themeIcon = "\uf186";
 
-        // Właściwość do przechowywania klucza API, z automatycznym zapisem i odczytem z ustawień aplikacji
         public string UserApiKey
         {
             get => Preferences.Default.Get("GeminiApiKey", string.Empty);
@@ -87,7 +83,6 @@ namespace PZPP_Grupa5.ViewModels
             }
         }
 
-        // Komenda do przetwarzania wideo
         [RelayCommand(CanExecute = nameof(CanProcess))]
         private async Task ProcessVideo()
         {
@@ -98,7 +93,6 @@ namespace PZPP_Grupa5.ViewModels
 
             try
             {
-                // Pobieranie tytułu i miniatury wideo z YouTube 
                 try
                 {
                     var youtube = new YoutubeExplode.YoutubeClient();
@@ -115,7 +109,6 @@ namespace PZPP_Grupa5.ViewModels
                     IsVideoInfoVisible = true;
                 }
 
-                // Pobieranie danych z YouTube
                 var youtubeDane = await _youtubeService.GetYouTubeAsync(VideoUrl);
                 TekstWynikowy = "Pobrano dane. Trwa analiza, proszę czekać...";
 
@@ -125,11 +118,9 @@ namespace PZPP_Grupa5.ViewModels
                     return;
                 }
 
-                // Przetwarzanie danych przez Gemini AI Studio
                 var wynikPrzetworzony = await _geminiService.GetGeminiAsync(youtubeDane, ChceStreszczenie, ChceWniosek, ChceTimestamps);
                 TekstWynikowy = wynikPrzetworzony;
 
-                // zapis do historii
                 ZapiszDoHistorii(VideoTitle, wynikPrzetworzony, VideoThumbnailUrl, VideoUrl);
             }
             catch (ApiKeyException)
@@ -161,7 +152,6 @@ namespace PZPP_Grupa5.ViewModels
             }
         }
 
-        // Metoda sprawdzająca, czy można przetworzyć wideo
         private bool CanProcess()
         {
             return !string.IsNullOrWhiteSpace(VideoUrl) && (ChceStreszczenie || ChceWniosek || ChceTimestamps);
@@ -180,7 +170,6 @@ namespace PZPP_Grupa5.ViewModels
             return "Wystąpił nieznany błąd, spróbuj ponownie";
         }
 
-        // Powrót do ekranu wprowadzania danych
         [RelayCommand]
         private void BackToInput()
         {
@@ -189,7 +178,6 @@ namespace PZPP_Grupa5.ViewModels
             IsInputVisible = true;
         }
 
-        // Zapisywanie rezultatu do pliku tekstowego
         [RelayCommand]
         private async Task SaveToFile()
         {
@@ -212,7 +200,6 @@ namespace PZPP_Grupa5.ViewModels
             }
         }
 
-        // Kopiowanie rezultatu do schowka
         [RelayCommand]
         private async Task CopyToClipboard()
         {
@@ -224,7 +211,6 @@ namespace PZPP_Grupa5.ViewModels
             await Shell.Current.DisplayAlert("Kopiowanie", "Wynik został skopiowany do schowka", "OK");
         }
 
-        // Zmiana motywu
         [RelayCommand]
         private void ToggleTheme()
         {
@@ -236,7 +222,6 @@ namespace PZPP_Grupa5.ViewModels
             ThemeIcon = Application.Current.UserAppTheme == AppTheme.Dark ? "\uf186;" : "\uf185;";
         }
 
-        // --- LOGIKA HISTORII CZATÓW ---
         private void WczytajZapisanaHistorie()
         {
             try
@@ -307,10 +292,8 @@ namespace PZPP_Grupa5.ViewModels
         {
             if (itemDoUsuniecia != null && HistoriaCzatow.Contains(itemDoUsuniecia))
             {
-                // Usuwamy z widoku
                 HistoriaCzatow.Remove(itemDoUsuniecia);
 
-                // Aktualizujemy zapis w pamięci telefonu/komputera
                 try
                 {
                     var itemsToSave = HistoriaCzatow.ToList();

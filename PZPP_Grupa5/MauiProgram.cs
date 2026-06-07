@@ -1,9 +1,7 @@
-<<<<<<< Updated upstream
-﻿using Microsoft.Extensions.Logging;
-=======
-﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
->>>>>>> Stashed changes
+using CommunityToolkit.Maui;
+using Microsoft.Extensions.Logging;
+using CommunityToolkit.Maui;
 
 namespace PZPP_Grupa5
 {
@@ -12,28 +10,22 @@ namespace PZPP_Grupa5
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
-            builder
-                .UseMauiApp<App>()
-                .ConfigureFonts(fonts =>
-                {
-                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                    fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                });
-
+            builder.UseMauiApp<App>().ConfigureFonts(fonts =>
+            {
+                fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+                fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+            }).UseMauiCommunityToolkit();
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
             // [[[ Dependency Injection klienta YouTube ]]]
             builder.Services.AddSingleton<YoutubeExplode.YoutubeClient>();
-
             // [[[ Rejestracja widoków i logiki UI ]]]
             builder.Services.AddTransient<PZPP_Grupa5.ViewModels.MainViewModel>();
             builder.Services.AddTransient<PZPP_Grupa5.Views.MainPage>();
-
             // [[[ Rejestracja serwisów ]]]
             builder.Services.AddSingleton<PZPP_Grupa5.Services.IYouTubeService, PZPP_Grupa5.Services.YouTubeService>();
             builder.Services.AddSingleton<PZPP_Grupa5.Services.IGeminiService, PZPP_Grupa5.Services.GeminiService>();
-
             return builder.Build();
         }
     }

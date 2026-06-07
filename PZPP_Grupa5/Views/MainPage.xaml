@@ -105,16 +105,13 @@
                         </Border>
 
                         <Button Text="PROCESS VIDEO" Command="{Binding ProcessVideoCommand}" Pressed="OnElementPressed" Released="OnElementReleased" BackgroundColor="#FF0000" TextColor="White" FontAttributes="Bold" CornerRadius="12" HeightRequest="60" WidthRequest="200" HorizontalOptions="Center">
-                            <Button.GestureRecognizers>
-                                <PointerGestureRecognizer PointerEntered="OnPointerEntered" PointerExited="OnPointerExited" />
-                            </Button.GestureRecognizers>
                         </Button>
                     </VerticalStackLayout>
                 </ScrollView>
 
                 <VerticalStackLayout IsVisible="{Binding IsLoading}" VerticalOptions="Center" HorizontalOptions="Fill" Spacing="30">
                     <ActivityIndicator IsRunning="{Binding IsLoading}" Color="#FF0000" HeightRequest="120" WidthRequest="120" />
-                    <Label Text="Trwa analiza materiału..." TextColor="{AppThemeBinding Light=#1A0B2E, Dark=White}" FontSize="22" HorizontalOptions="Center" FontAttributes="Bold" />
+                    <Label Text="Please wait..." TextColor="{AppThemeBinding Light=#1A0B2E, Dark=White}" FontSize="22" HorizontalOptions="Center" FontAttributes="Bold" />
                 </VerticalStackLayout>
 
                 <ScrollView x:Name="ResultView" IsVisible="{Binding IsResultVisible}" ZIndex="1">
@@ -180,10 +177,7 @@
                             </VerticalStackLayout>
                         </Border>
 
-                        <Button Text="BACK TO INPUT" Clicked="OnBackButtonClicked" Pressed="OnElementPressed" Released="OnElementReleased" BackgroundColor="#FF0000" TextColor="White" CornerRadius="12" HeightRequest="50">
-                            <Button.GestureRecognizers>
-                                <PointerGestureRecognizer PointerEntered="OnPointerEntered" PointerExited="OnPointerExited" />
-                            </Button.GestureRecognizers>
+                        <Button Text="GO BACK" Clicked="OnBackButtonClicked" Pressed="OnElementPressed" Released="OnElementReleased" BackgroundColor="#FF0000" TextColor="White" CornerRadius="12" HeightRequest="50">
                         </Button>
                     </VerticalStackLayout>
                 </ScrollView>

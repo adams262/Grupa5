@@ -1394,7 +1394,6 @@
         "packagesPath": "C:\\Users\\kozin\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\kozin\\Documents\\PTG projekty\\ZPP\\TestProject4\\obj\\",
         "projectStyle": "PackageReference",
-        "crossTargeting": true,
         "fallbackFolders": [
           "A:\\Visual Studio\\Addons\\NuGetPackages"
         ],
@@ -1404,7 +1403,7 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net10.0"
+          "net10.0-windows10.0.19041.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -1412,9 +1411,9 @@
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net10.0": {
-            "framework": "net10.0",
-            "targetAlias": "net10.0",
+          "net10.0-windows10.0.19041.0": {
+            "framework": "net10.0-windows10.0.19041",
+            "targetAlias": "net10.0-windows10.0.19041.0",
             "projectReferences": {
               "C:\\Users\\kozin\\Documents\\PTG projekty\\ZPP\\PZPP_Grupa5\\PZPP_Grupa5.csproj": {
                 "projectPath": "C:\\Users\\kozin\\Documents\\PTG projekty\\ZPP\\PZPP_Grupa5\\PZPP_Grupa5.csproj"
@@ -1435,9 +1434,9 @@
         "SdkAnalysisLevel": "10.0.300"
       },
       "frameworks": {
-        "net10.0": {
-          "framework": "net10.0",
-          "targetAlias": "net10.0",
+        "net10.0-windows10.0.19041.0": {
+          "framework": "net10.0-windows10.0.19041",
+          "targetAlias": "net10.0-windows10.0.19041.0",
           "dependencies": {
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
@@ -1479,8 +1478,17 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.Windows.SDK.NET.Ref",
+              "version": "[10.0.19041.57, 10.0.19041.57]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            },
+            "Microsoft.Windows.SDK.NET.Ref.Windows": {
               "privateAssets": "all"
             }
           },

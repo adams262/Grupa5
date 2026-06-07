@@ -50,7 +50,6 @@ public partial class MainPage : ContentPage
         );
     }
 
-    // ANIMACJA: Szybkie wciśnięcie elementu (Click Down)
     private async void OnElementPressed(object sender, EventArgs e)
     {
         if (sender is VisualElement element)
@@ -59,7 +58,6 @@ public partial class MainPage : ContentPage
         }
     }
 
-    // ANIMACJA: Odbicie po puszczeniu przycisku (Click Up)
     private async void OnElementReleased(object sender, EventArgs e)
     {
         if (sender is VisualElement element)
@@ -68,19 +66,17 @@ public partial class MainPage : ContentPage
         }
     }
 
-    // ANIMACJA: Najechanie kursorem (Hover PC) - Powiększenie i lekki Tilt
     private async void OnPointerEntered(object sender, PointerEventArgs e)
     {
         if (sender is VisualElement element)
         {
             await Task.WhenAll(
                 element.ScaleTo(1.02, 150, Easing.CubicOut),
-                element.RotateTo(0.5, 150, Easing.CubicOut) // Lekkie przechylenie (0.5 stopnia)
+                element.RotateTo(0.5, 150, Easing.CubicOut)
             );
         }
     }
 
-    // ANIMACJA: Zjechanie kursorem (Hover PC) - Powrót do normalności
     private async void OnPointerExited(object sender, PointerEventArgs e)
     {
         if (sender is VisualElement element)
@@ -92,13 +88,10 @@ public partial class MainPage : ContentPage
         }
     }
 
-    // ANIMACJA: Kliknięcie w historię z efektem odbicia
     private async void OnHistoryItemTapped(object sender, TappedEventArgs e)
     {
-        // Sprawdzamy BindingContext dla dowolnego elementu (BindableObject), który wywołał kliknięcie
         if (sender is BindableObject clickedElement && clickedElement.BindingContext is Models.ChatHistoryItem historyItem)
         {
-            // Zwiń menu boczne
             OnOverlayTapped(sender, e);
 
             if (BindingContext is MainViewModel vm)
@@ -113,10 +106,8 @@ public partial class MainPage : ContentPage
 
     private void OnDeleteHistoryItemClicked(object sender, EventArgs e)
     {
-    // Wyciągamy element historii przypisany do klikniętego przycisku
         if (sender is Button button && button.BindingContext is Models.ChatHistoryItem itemDoUsuniecia)
         {
-        // Dobieramy się do ViewModelu i ręcznie wywołujemy wygenerowaną przez CommunityToolkit komendę
             if (BindingContext is MainViewModel vm)
             {
                 vm.UsunHistorieCommand.Execute(itemDoUsuniecia);
