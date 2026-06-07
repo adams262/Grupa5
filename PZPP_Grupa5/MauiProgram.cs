@@ -1,4 +1,9 @@
+<<<<<<< Updated upstream
 ﻿using Microsoft.Extensions.Logging;
+=======
+﻿using CommunityToolkit.Maui;
+using Microsoft.Extensions.Logging;
+>>>>>>> Stashed changes
 
 namespace PZPP_Grupa5
 {
@@ -16,7 +21,7 @@ namespace PZPP_Grupa5
                 });
 
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
             // [[[ Dependency Injection klienta YouTube ]]]
             builder.Services.AddSingleton<YoutubeExplode.YoutubeClient>();

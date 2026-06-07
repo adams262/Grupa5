@@ -1,0 +1,296 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PZPP_Grupa5.Views.MainPage"
+             xmlns:viewmodels="clr-namespace:PZPP_Grupa5.ViewModels"
+             x:DataType="viewmodels:MainViewModel"
+             Shell.NavBarIsVisible="False">
+
+    <ContentPage.Resources>
+        <Style TargetType="Button">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Pressed">
+                            <VisualState.Setters>
+                                <Setter Property="Scale" Value="0.95" />
+                                <Setter Property="Opacity" Value="0.8" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+            <GradientStop Color="{AppThemeBinding Light=#f2f2f2, Dark=#212121}" Offset="0.2" />
+            <GradientStop Color="{AppThemeBinding Light=#d2f2fc, Dark=#fa1111}" Offset="2.5" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <Grid>
+        <Grid RowDefinitions="Auto, *">
+            <Grid Grid.Row="0" Padding="15,15,15,0" HorizontalOptions="Fill">
+
+                <Border StrokeShape="RoundRectangle 8" StrokeThickness="0" BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#2A2A2A}" HorizontalOptions="Start" WidthRequest="40" HeightRequest="40" Padding="0">
+                    <Border.Shadow>
+                        <Shadow Brush="Black" Offset="4,4" Radius="10" Opacity="0.3" />
+                    </Border.Shadow>
+                    <Border.GestureRecognizers>
+                        <PointerGestureRecognizer PointerEntered="OnPointerEntered" PointerExited="OnPointerExited" />
+                    </Border.GestureRecognizers>
+                    <Button Clicked="OnHamburgerClicked" Pressed="OnElementPressed" Released="OnElementReleased" Text="&#xf0c9;" FontFamily="FontAwesomeSolid" TextColor="#FF0000" FontSize="20" BackgroundColor="Transparent" BorderWidth="0" Padding="0" Margin="0" />
+                </Border>
+
+                <Border StrokeShape="RoundRectangle 8" StrokeThickness="0" BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#2A2A2A}" HorizontalOptions="End" WidthRequest="40" HeightRequest="40" Padding="0">
+                    <Border.Shadow>
+                        <Shadow Brush="Black" Offset="4,4" Radius="10" Opacity="0.3" />
+                    </Border.Shadow>
+                    <Border.GestureRecognizers>
+                        <PointerGestureRecognizer PointerEntered="OnPointerEntered" PointerExited="OnPointerExited" />
+                    </Border.GestureRecognizers>
+                    <Button Command="{Binding ToggleThemeCommand}" Pressed="OnElementPressed" Released="OnElementReleased" Text="{Binding ThemeIcon}" FontFamily="FontAwesomeSolid" TextColor="#FF0000" FontSize="20" BackgroundColor="Transparent" BorderWidth="0" Padding="0" Margin="0" />
+                </Border>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <ScrollView x:Name="InputView" IsVisible="{Binding IsInputVisible} " ZIndex="0">
+                    <VerticalStackLayout Padding="25" Spacing="25" HorizontalOptions="Fill" MaximumWidthRequest="500">
+                        <Label Text="AI-NALISER" FontSize="32" FontAttributes="Bold" TextColor="#FF0000" HorizontalOptions="Center" Margin="0,30,0,10"/>
+
+                        <Border StrokeShape="RoundRectangle 12" StrokeThickness="2" BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#212121}" Padding="20">
+                            <Border.GestureRecognizers>
+                                <PointerGestureRecognizer PointerEntered="OnPointerEntered" PointerExited="OnPointerExited" />
+                            </Border.GestureRecognizers>
+                            <Border.Stroke>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                    <GradientStop Color="{AppThemeBinding Light=#E0D0F0, Dark=#151515}" Offset="0.0" />
+                                    <GradientStop Color="{AppThemeBinding Light=#E0D0F0, Dark=#FF0000}" Offset="1.0" />
+                                </LinearGradientBrush>
+                            </Border.Stroke>
+                            <VerticalStackLayout Spacing="10">
+                                <Label Text="LINK" TextColor="#FF0000" FontSize="20" FontAttributes="Bold"/>
+                                <Entry Placeholder="https://www.youtube.com/..." Text="{Binding VideoUrl}" TextColor="{AppThemeBinding Light=#1A0B2E, Dark=White}" PlaceholderColor="Gray" ClearButtonVisibility="WhileEditing" />
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <Border StrokeShape="RoundRectangle 12" StrokeThickness="2" BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#212121}" Padding="20">
+                            <Border.GestureRecognizers>
+                                <PointerGestureRecognizer PointerEntered="OnPointerEntered" PointerExited="OnPointerExited" />
+                            </Border.GestureRecognizers>
+                            <Border.Stroke>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                    <GradientStop Color="{AppThemeBinding Light=#E0D0F0, Dark=#151515}" Offset="0.0" />
+                                    <GradientStop Color="{AppThemeBinding Light=#E0D0F0, Dark=#FF0000}" Offset="1.0" />
+                                </LinearGradientBrush>
+                            </Border.Stroke>
+                            <VerticalStackLayout Spacing="15">
+                                <Label Text="OPTIONS" TextColor="#FF0000" FontSize="20" FontAttributes="Bold" Margin="0,0,0,5"/>
+                                <HorizontalStackLayout Spacing="15">
+                                    <CheckBox IsChecked="{Binding ChceStreszczenie}" Color="#FF0000" />
+                                    <Label Text="SUMMARY" VerticalOptions="Center" TextColor="{AppThemeBinding Light=#1A0B2E, Dark=White}" />
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout Spacing="15">
+                                    <CheckBox IsChecked="{Binding ChceWniosek}" Color="#FF0000" />
+                                    <Label Text="TAKEAWAYS" VerticalOptions="Center" TextColor="{AppThemeBinding Light=#1A0B2E, Dark=White}" />
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout Spacing="15">
+                                    <CheckBox IsChecked="{Binding ChceTimestamps}" Color="#FF0000" />
+                                    <Label Text="TIMESTAMPS" VerticalOptions="Center" TextColor="{AppThemeBinding Light=#1A0B2E, Dark=White}" />
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <Button Text="PROCESS VIDEO" Command="{Binding ProcessVideoCommand}" Pressed="OnElementPressed" Released="OnElementReleased" BackgroundColor="#FF0000" TextColor="White" FontAttributes="Bold" CornerRadius="12" HeightRequest="60" WidthRequest="200" HorizontalOptions="Center">
+                            <Button.GestureRecognizers>
+                                <PointerGestureRecognizer PointerEntered="OnPointerEntered" PointerExited="OnPointerExited" />
+                            </Button.GestureRecognizers>
+                        </Button>
+                    </VerticalStackLayout>
+                </ScrollView>
+
+                <VerticalStackLayout IsVisible="{Binding IsLoading}" VerticalOptions="Center" HorizontalOptions="Fill" Spacing="30">
+                    <ActivityIndicator IsRunning="{Binding IsLoading}" Color="#FF0000" HeightRequest="120" WidthRequest="120" />
+                    <Label Text="Trwa analiza materiału..." TextColor="{AppThemeBinding Light=#1A0B2E, Dark=White}" FontSize="22" HorizontalOptions="Center" FontAttributes="Bold" />
+                </VerticalStackLayout>
+
+                <ScrollView x:Name="ResultView" IsVisible="{Binding IsResultVisible}" ZIndex="1">
+                    <VerticalStackLayout Padding="25" Spacing="20" HorizontalOptions="Fill" MaximumWidthRequest="500">
+
+                        <VerticalStackLayout IsVisible="{Binding IsVideoInfoVisible}" Spacing="2
+                                             " HorizontalOptions="Fill">
+
+                            <Border StrokeShape="RoundRectangle 12" StrokeThickness="0" HeightRequest="250" HorizontalOptions="Fill">
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding OdtworzWideoCommand}" />
+                                    <PointerGestureRecognizer PointerEntered="OnPointerEntered" PointerExited="OnPointerExited" />
+                                </Border.GestureRecognizers>
+                                <Image Source="{Binding VideoThumbnailUrl}" Aspect="AspectFill" />
+                            </Border>
+
+                            <Border BackgroundColor="Transparent" StrokeThickness="0" Padding="0,5">
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding OtworzLinkWideoCommand}" />
+                                    <PointerGestureRecognizer PointerEntered="OnPointerEntered" PointerExited="OnPointerExited" />
+                                </Border.GestureRecognizers>
+                                <Label Text="{Binding VideoTitle}" 
+       HorizontalTextAlignment="Center" 
+       FontAttributes="Bold" 
+       FontSize="16" 
+       HorizontalOptions="Fill"
+       TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+                            </Border>
+
+                           
+                        </VerticalStackLayout>
+
+                        <Border StrokeShape="RoundRectangle 12" StrokeThickness="0" BackgroundColor="{AppThemeBinding Light=White, Dark=#212121}">
+                            <VerticalStackLayout>
+                                <Grid BackgroundColor="{AppThemeBinding Light=#FFE5E5, Dark=#2A2A2A}" Padding="15,10">
+                                    <Label Text="ANALYSIS RESULT" TextColor="#FF0000" FontSize="20" VerticalOptions="Center" FontAttributes="Bold"/>
+
+                                    <HorizontalStackLayout HorizontalOptions="End" Spacing="10" VerticalOptions="Center">
+                                        <Border StrokeShape="RoundRectangle 8" StrokeThickness="0" BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#333333}" WidthRequest="36" HeightRequest="36" Padding="0">
+                                            <Border.Shadow>
+                                                <Shadow Brush="Black" Offset="2,2" Radius="5" Opacity="0.3" />
+                                            </Border.Shadow>
+                                            <Border.GestureRecognizers>
+                                                <PointerGestureRecognizer PointerEntered="OnPointerEntered" PointerExited="OnPointerExited" />
+                                            </Border.GestureRecognizers>
+                                            <Button Command="{Binding SaveToFileCommand}" Pressed="OnElementPressed" Released="OnElementReleased" Text="&#xf019;" FontFamily="FontAwesomeSolid" TextColor="#FF0000" FontSize="16" BackgroundColor="Transparent" BorderWidth="0" Padding="0" Margin="0" />
+                                        </Border>
+
+                                        <Border StrokeShape="RoundRectangle 8" StrokeThickness="0" BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#333333}" WidthRequest="36" HeightRequest="36" Padding="0">
+                                            <Border.Shadow>
+                                                <Shadow Brush="Black" Offset="2,2" Radius="5" Opacity="0.3" />
+                                            </Border.Shadow>
+                                            <Border.GestureRecognizers>
+                                                <PointerGestureRecognizer PointerEntered="OnPointerEntered" PointerExited="OnPointerExited" />
+                                            </Border.GestureRecognizers>
+                                            <Button Command="{Binding CopyToClipboardCommand}" Pressed="OnElementPressed" Released="OnElementReleased" Text="&#xf0c5;" FontFamily="FontAwesomeSolid" TextColor="#FF0000" FontSize="16" BackgroundColor="Transparent" BorderWidth="0" Padding="0" Margin="0" />
+                                        </Border>
+                                    </HorizontalStackLayout>
+                                </Grid>
+                                <ScrollView HeightRequest="300" Padding="15">
+                                    <Label Text="{Binding TekstWynikowy}" TextColor="{AppThemeBinding Light=Black, Dark=White}" LineHeight="1.4" />
+                                </ScrollView>
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <Button Text="BACK TO INPUT" Clicked="OnBackButtonClicked" Pressed="OnElementPressed" Released="OnElementReleased" BackgroundColor="#FF0000" TextColor="White" CornerRadius="12" HeightRequest="50">
+                            <Button.GestureRecognizers>
+                                <PointerGestureRecognizer PointerEntered="OnPointerEntered" PointerExited="OnPointerExited" />
+                            </Button.GestureRecognizers>
+                        </Button>
+                    </VerticalStackLayout>
+                </ScrollView>
+            </Grid>
+        </Grid>
+
+        <BoxView x:Name="MenuOverlay" BackgroundColor="Black" Opacity="0" IsVisible="False">
+            <BoxView.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnOverlayTapped" />
+            </BoxView.GestureRecognizers>
+        </BoxView>
+
+        <Grid x:Name="SidebarMenu" BackgroundColor="{AppThemeBinding Light=#F5F0FF, Dark=#212121}" WidthRequest="300" HorizontalOptions="Start" TranslationX="-300">
+            <Border StrokeShape="RoundRectangle 0,15,15,0" StrokeThickness="0" BackgroundColor="{AppThemeBinding Light=#F5F0FF, Dark=#212121}">
+                <Grid RowDefinitions="Auto, Auto, Auto, Auto, *" Padding="20">
+
+                    <Border Grid.Row="0" StrokeShape="RoundRectangle 8" StrokeThickness="0" BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#2A2A2A}" HorizontalOptions="End" WidthRequest="40" HeightRequest="40" Margin="0,0,0,20" Padding="0">
+                        <Border.Shadow>
+                            <Shadow Brush="Black" Offset="4,4" Radius="10" Opacity="0.3" />
+                        </Border.Shadow>
+                        <Border.GestureRecognizers>
+                            <PointerGestureRecognizer PointerEntered="OnPointerEntered" PointerExited="OnPointerExited" />
+                        </Border.GestureRecognizers>
+                        <Button Clicked="OnOverlayTapped" Pressed="OnElementPressed" Released="OnElementReleased" Text="&#xf060;" FontFamily="FontAwesomeSolid" TextColor="#FF0000" FontSize="20" BackgroundColor="Transparent" BorderWidth="0" Padding="0" Margin="0" />
+                    </Border>
+
+                    <Border Grid.Row="2" StrokeShape="RoundRectangle 12" StrokeThickness="2" BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#2A2A2A}" Padding="15" Margin="5,0,5,25">
+                        <Border.Shadow>
+                            <Shadow Brush="Black" Offset="4,4" Radius="10" Opacity="0.3" />
+                        </Border.Shadow>
+                        <Border.GestureRecognizers>
+                            <PointerGestureRecognizer PointerEntered="OnPointerEntered" PointerExited="OnPointerExited" />
+                        </Border.GestureRecognizers>
+                        <Border.Stroke>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="{AppThemeBinding Light=#E0D0F0, Dark=#151515}" Offset="0.0" />
+                                <GradientStop Color="{AppThemeBinding Light=#E0D0F0, Dark=#FF0000}" Offset="1.0" />
+                            </LinearGradientBrush>
+                        </Border.Stroke>
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="GEMINI API" TextColor="#FF0000" FontAttributes="Bold"/>
+                            <Entry Text="{Binding UserApiKey}" TextColor="{AppThemeBinding Light=#1A0B2E, Dark=White}" PlaceholderColor="Gray" Placeholder="Wklej klucz..." />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Label Grid.Row="3" Text="CHAT HISTORY" TextColor="#FF0000" FontSize="20" FontAttributes="Bold" Margin="5,0,0,5"/>
+
+                    <CollectionView Grid.Row="4" ItemsSource="{Binding HistoriaCzatow}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="0" />
+                        </CollectionView.ItemsLayout>
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Padding="8,8,15,15">
+                                    <Border StrokeShape="RoundRectangle 12" StrokeThickness="0" BackgroundColor="{AppThemeBinding Light=White, Dark=#2A2A2A}" Padding="15">
+                                        <Border.Shadow>
+                                            <Shadow Brush="Black" Offset="4,4" Radius="10" Opacity="0.3" />
+                                        </Border.Shadow>
+
+                                        <Grid ColumnDefinitions="*, Auto">
+
+                                            <VerticalStackLayout Grid.Column="0" Spacing="5" VerticalOptions="Center" BackgroundColor="Transparent">
+                                                <VerticalStackLayout.GestureRecognizers>
+                                                    <TapGestureRecognizer Tapped="OnHistoryItemTapped" />
+                                                </VerticalStackLayout.GestureRecognizers>
+                                                <Label Text="{Binding TytulWideo}" TextColor="{AppThemeBinding Light=Black, Dark=White}" FontAttributes="Bold" LineBreakMode="TailTruncation" />
+                                                <Label Text="{Binding DataUtworzenia, StringFormat='{0:dd.MM.yyyy HH:mm}'}" FontSize="12" TextColor="Gray" />
+                                            </VerticalStackLayout>
+
+                                            <Button Grid.Column="1" 
+        Clicked="OnDeleteHistoryItemClicked"
+        Pressed="OnElementPressed"
+        Released="OnElementReleased"
+        Text="&#xf1f8;" 
+        FontFamily="FontAwesomeSolid" 
+        TextColor="#FF0000" 
+        FontSize="18" 
+        BackgroundColor="Transparent" 
+        BorderWidth="0" 
+        VerticalOptions="Center">
+                                                <VisualStateManager.VisualStateGroups>
+                                                    <VisualStateGroupList>
+                                                        <VisualStateGroup x:Name="CommonStates">
+                                                            <VisualState x:Name="Normal">
+                                                                <VisualState.Setters>
+                                                                    <Setter Property="Opacity" Value="0.2" />
+                                                                </VisualState.Setters>
+                                                            </VisualState>
+                                                            <VisualState x:Name="PointerOver">
+                                                                <VisualState.Setters>
+                                                                    <Setter Property="Opacity" Value="1.0" />
+                                                                </VisualState.Setters>
+                                                            </VisualState>
+                                                        </VisualStateGroup>
+                                                    </VisualStateGroupList>
+                                                </VisualStateManager.VisualStateGroups>
+                                            </Button>
+
+                                        </Grid>
+                                    </Border>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</ContentPage>
