@@ -1,5 +1,5 @@
-﻿using CommunityToolkit.Maui.Alerts;  
-using CommunityToolkit.Maui.Core;    
+using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Maui.Storage;
 using CommunityToolkit.Mvvm;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -9,9 +9,12 @@ using PZPP_Grupa5.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading;
-using System.Windows.Input; 
+using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace PZPP_Grupa5.ViewModels
 {
@@ -20,11 +23,17 @@ namespace PZPP_Grupa5.ViewModels
         private readonly IYouTubeService _youtubeService;
         private readonly IGeminiService _geminiService;
 
+        // Kolekcja przechowująca historię czatów
+        public ObservableCollection<ChatHistoryItem> HistoriaCzatow { get; set; } = new();
+
         // Dependency Injection serwisów YouTubeService i GeminiService
         public MainViewModel(IYouTubeService youtubeService, IGeminiService geminiService)
         {
             _youtubeService = youtubeService;
             _geminiService = geminiService;
+
+            // Wczytanie zapisanej historii podczas uruchamiania aplikacji
+            WczytajZapisanaHistorie();
         }
 
         [ObservableProperty]
@@ -64,6 +73,9 @@ namespace PZPP_Grupa5.ViewModels
         [ObservableProperty]
         private bool isVideoInfoVisible;
 
+        [ObservableProperty]
+        private string _themeIcon = "\uf186";
+
         // Właściwość do przechowywania klucza API, z automatycznym zapisem i odczytem z ustawień aplikacji
         public string UserApiKey
         {
@@ -85,7 +97,8 @@ namespace PZPP_Grupa5.ViewModels
             IsVideoInfoVisible = false;
 
             try
-            {   // Pobieranie tytułu i miniatury wideo z YouTube (niezależnie od dalszej analizy, aby nie przerywać procesu w przypadku błędu z miniaturą)
+            {
+                // Pobieranie tytułu i miniatury wideo z YouTube 
                 try
                 {
                     var youtube = new YoutubeExplode.YoutubeClient();
@@ -116,6 +129,8 @@ namespace PZPP_Grupa5.ViewModels
                 var wynikPrzetworzony = await _geminiService.GetGeminiAsync(youtubeDane, ChceStreszczenie, ChceWniosek, ChceTimestamps);
                 TekstWynikowy = wynikPrzetworzony;
 
+                // zapis do historii
+                ZapiszDoHistorii(VideoTitle, wynikPrzetworzony, VideoThumbnailUrl, VideoUrl);
             }
             catch (ApiKeyException)
             {
@@ -137,7 +152,6 @@ namespace PZPP_Grupa5.ViewModels
             catch (Exception ex)
             {
                 TekstWynikowy = ExplainError(ex.Message);
-
                 System.Diagnostics.Debug.WriteLine($"Pełny błąd API: {ex.Message}");
             }
             finally
@@ -147,7 +161,7 @@ namespace PZPP_Grupa5.ViewModels
             }
         }
 
-        // Metoda sprawdzająca, czy można przetworzyć wideo (czy jest podany URL i wybrana przynajmniej jedna opcja analizy)
+        // Metoda sprawdzająca, czy można przetworzyć wideo
         private bool CanProcess()
         {
             return !string.IsNullOrWhiteSpace(VideoUrl) && (ChceStreszczenie || ChceWniosek || ChceTimestamps);
@@ -163,10 +177,13 @@ namespace PZPP_Grupa5.ViewModels
             if (e.Contains("safety") || e.Contains("blocked"))
                 return "AI uznało, że ten film jest zbyt kontrowersyjny i odmówiło analizy.";
 
+            if (e.Contains("overloaded") || e.Contains("503"))
+                return "Serwery Gemini są przeciążone. Spróbuj ponownie za chwilę.";
+
             return "Wystąpił nieznany błąd, spróbuj ponownie";
         }
 
-        //powrót do ekranu wprowadzania danych
+        // Powrót do ekranu wprowadzania danych
         [RelayCommand]
         private void BackToInput()
         {
@@ -175,7 +192,7 @@ namespace PZPP_Grupa5.ViewModels
             IsInputVisible = true;
         }
 
-        //zapisywanie rezultatu do pliku tekstowego
+        // Zapisywanie rezultatu do pliku tekstowego
         [RelayCommand]
         private async Task SaveToFile()
         {
@@ -185,7 +202,6 @@ namespace PZPP_Grupa5.ViewModels
             try
             {
                 using var stream = new MemoryStream(Encoding.UTF8.GetBytes(TekstWynikowy));
-
                 var fileSaverResult = await FileSaver.Default.SaveAsync("Analiza_Gemini.txt", stream, CancellationToken.None);
 
                 if (fileSaverResult.IsSuccessful)
@@ -199,7 +215,7 @@ namespace PZPP_Grupa5.ViewModels
             }
         }
 
-        //kopiowanie rezultatu do schowka
+        // Kopiowanie rezultatu do schowka
         [RelayCommand]
         private async Task CopyToClipboard()
         {
@@ -209,6 +225,115 @@ namespace PZPP_Grupa5.ViewModels
             }
             await Clipboard.Default.SetTextAsync(TekstWynikowy);
             await Shell.Current.DisplayAlert("Kopiowanie", "Wynik został skopiowany do schowka", "OK");
+        }
+
+        // Zmiana motywu
+        [RelayCommand]
+        private void ToggleTheme()
+        {
+            if (Application.Current.UserAppTheme == AppTheme.Dark)
+                Application.Current.UserAppTheme = AppTheme.Light;
+            else
+                Application.Current.UserAppTheme = AppTheme.Dark;
+
+            ThemeIcon = Application.Current.UserAppTheme == AppTheme.Dark ? "\uf186;" : "\uf185;";
+        }
+
+        // --- LOGIKA HISTORII CZATÓW ---
+        private void WczytajZapisanaHistorie()
+        {
+            try
+            {
+                var savedHistory = Preferences.Default.Get("ChatHistoryJson", string.Empty);
+                if (!string.IsNullOrWhiteSpace(savedHistory))
+                {
+                    var items = JsonSerializer.Deserialize<List<ChatHistoryItem>>(savedHistory);
+                    if (items != null)
+                    {
+                        HistoriaCzatow.Clear();
+                        foreach (var item in items)
+                        {
+                            HistoriaCzatow.Add(item);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Błąd podczas wczytywania historii: {ex.Message}");
+            }
+        }
+
+        private void ZapiszDoHistorii(string tytul, string wynik, string miniatura, string url)
+        {
+            var newItem = new ChatHistoryItem
+            {
+                TytulWideo = string.IsNullOrWhiteSpace(tytul) ? "Nieznane wideo" : tytul,
+                DataUtworzenia = DateTime.Now,
+                TekstWynikowy = wynik,
+                VideoThumbnailUrl = miniatura,
+                VideoUrl = url
+            };
+
+            HistoriaCzatow.Insert(0, newItem);
+
+            try
+            {
+                var itemsToSave = HistoriaCzatow.Take(20).ToList();
+                var json = JsonSerializer.Serialize(itemsToSave);
+                Preferences.Default.Set("ChatHistoryJson", json);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Błąd zapisu historii: {ex.Message}");
+            }
+        }
+
+        [RelayCommand]
+        private void WczytajHistorie(ChatHistoryItem wybranaHistoria)
+        {
+            if (wybranaHistoria == null) return;
+
+            VideoTitle = wybranaHistoria.TytulWideo;
+            TekstWynikowy = wybranaHistoria.TekstWynikowy;
+            VideoThumbnailUrl = wybranaHistoria.VideoThumbnailUrl;
+            VideoUrl = wybranaHistoria.VideoUrl;
+
+            IsVideoInfoVisible = true;
+            IsInputVisible = false;
+            IsLoading = false;
+            IsResultVisible = true;
+        }
+
+        [RelayCommand]
+        private void UsunHistorie(ChatHistoryItem itemDoUsuniecia)
+        {
+            if (itemDoUsuniecia != null && HistoriaCzatow.Contains(itemDoUsuniecia))
+            {
+                // Usuwamy z widoku
+                HistoriaCzatow.Remove(itemDoUsuniecia);
+
+                // Aktualizujemy zapis w pamięci telefonu/komputera
+                try
+                {
+                    var itemsToSave = HistoriaCzatow.ToList();
+                    var json = JsonSerializer.Serialize(itemsToSave);
+                    Preferences.Default.Set("ChatHistoryJson", json);
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"Błąd podczas usuwania historii: {ex.Message}");
+                }
+            }
+        }
+
+        [RelayCommand]
+        private async Task OtworzLinkWideo()
+        {
+            if (!string.IsNullOrWhiteSpace(VideoUrl))
+            {
+                await Launcher.Default.OpenAsync(VideoUrl);
+            }
         }
     }
 }
