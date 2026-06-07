@@ -1,0 +1,10 @@
+// Ten plik zawiera reguły kolorowania kart dokumentów według wyrażeń regularnych. Każdy wiersz zawiera wyrażenie regularne, które będzie testowane względem pełnej ścieżki pliku. Wszystkie pliki pasujące do wyrażenia regularnego będą używały takiego samego koloru.
+// Kolor przypisany do dowolnej grupy plików można dostosować, klikając prawym przyciskiem myszy kartę i wybierając pozycję „Ustaw kolor karty”.
+// Wyrażenia regularne zostaną dopasowane w kolejności, w jakiej są wyświetlane w tym pliku. Informacje o składni znajdziesz tutaj: https://docs.microsoft.com/pl-pl/dotnet/standard/base-types/regular-expressions.
+// Wyrażenia regularne są domyślnie dopasowywane jako bez uwzględniania wielkości liter. To zachowanie można zastąpić przy użyciu opcji grupy przechwytywania, takich jak „(?-i:expression)”.
+// Edytuj ten plik i zapisz zmiany, aby natychmiast je zastosować. Wszelkie błędy napotkane podczas analizowania lub oceniania wyrażeń będą wyświetlane w oknie Dane wyjściowe w okienku o nazwie „Kolorowanie według wyrażenia regularnego”.
+^.*\.cs$
+^.*\.fs$
+^.*\.vb$
+^.*\.cp?p?$
+^.*\.hp?p?$
