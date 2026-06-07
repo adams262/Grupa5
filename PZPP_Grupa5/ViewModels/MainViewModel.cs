@@ -1,5 +1,5 @@
-﻿using CommunityToolkit.Maui.Alerts;  
-using CommunityToolkit.Maui.Core;    
+using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Maui.Storage;
 using CommunityToolkit.Mvvm;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -9,9 +9,12 @@ using PZPP_Grupa5.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading;
-using System.Windows.Input; 
+using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace PZPP_Grupa5.ViewModels
 {
@@ -20,11 +23,17 @@ namespace PZPP_Grupa5.ViewModels
         private readonly IYouTubeService _youtubeService;
         private readonly IGeminiService _geminiService;
 
+        // Kolekcja przechowująca historię czatów
+        public ObservableCollection<ChatHistoryItem> HistoriaCzatow { get; set; } = new();
+
         // Dependency Injection serwisów YouTubeService i GeminiService
         public MainViewModel(IYouTubeService youtubeService, IGeminiService geminiService)
         {
             _youtubeService = youtubeService;
             _geminiService = geminiService;
+
+            // Wczytanie zapisanej historii podczas uruchamiania aplikacji
+            WczytajZapisanaHistorie();
         }
 
         [ObservableProperty]
@@ -88,7 +97,8 @@ namespace PZPP_Grupa5.ViewModels
             IsVideoInfoVisible = false;
 
             try
-            {   // Pobieranie tytułu i miniatury wideo z YouTube (niezależnie od dalszej analizy, aby nie przerywać procesu w przypadku błędu z miniaturą)
+            {
+                // Pobieranie tytułu i miniatury wideo z YouTube 
                 try
                 {
                     var youtube = new YoutubeExplode.YoutubeClient();
@@ -119,6 +129,8 @@ namespace PZPP_Grupa5.ViewModels
                 var wynikPrzetworzony = await _geminiService.GetGeminiAsync(youtubeDane, ChceStreszczenie, ChceWniosek, ChceTimestamps);
                 TekstWynikowy = wynikPrzetworzony;
 
+                // zapis do historii
+                ZapiszDoHistorii(VideoTitle, wynikPrzetworzony, VideoThumbnailUrl, VideoUrl);
             }
             catch (ApiKeyException)
             {
@@ -140,7 +152,6 @@ namespace PZPP_Grupa5.ViewModels
             catch (Exception ex)
             {
                 TekstWynikowy = ExplainError(ex.Message);
-
                 System.Diagnostics.Debug.WriteLine($"Pełny błąd API: {ex.Message}");
             }
             finally
@@ -150,7 +161,7 @@ namespace PZPP_Grupa5.ViewModels
             }
         }
 
-        // Metoda sprawdzająca, czy można przetworzyć wideo (czy jest podany URL i wybrana przynajmniej jedna opcja analizy)
+        // Metoda sprawdzająca, czy można przetworzyć wideo
         private bool CanProcess()
         {
             return !string.IsNullOrWhiteSpace(VideoUrl) && (ChceStreszczenie || ChceWniosek || ChceTimestamps);
@@ -167,10 +178,13 @@ namespace PZPP_Grupa5.ViewModels
     if (e.Contains("overloaded") || e.Contains("503"))
         return "Serwery Gemini są przeciążone. Spróbuj ponownie za chwilę.";
 
+            if (e.Contains("overloaded") || e.Contains("503"))
+                return "Serwery Gemini są przeciążone. Spróbuj ponownie za chwilę.";
+
             return "Wystąpił nieznany błąd, spróbuj ponownie";
         }
 
-        //powrót do ekranu wprowadzania danych
+        // Powrót do ekranu wprowadzania danych
         [RelayCommand]
         private void BackToInput()
         {
@@ -179,7 +193,7 @@ namespace PZPP_Grupa5.ViewModels
             IsInputVisible = true;
         }
 
-        //zapisywanie rezultatu do pliku tekstowego
+        // Zapisywanie rezultatu do pliku tekstowego
         [RelayCommand]
         private async Task SaveToFile()
         {
@@ -189,7 +203,6 @@ namespace PZPP_Grupa5.ViewModels
             try
             {
                 using var stream = new MemoryStream(Encoding.UTF8.GetBytes(TekstWynikowy));
-
                 var fileSaverResult = await FileSaver.Default.SaveAsync("Analiza_Gemini.txt", stream, CancellationToken.None);
 
                 if (fileSaverResult.IsSuccessful)
@@ -203,7 +216,7 @@ namespace PZPP_Grupa5.ViewModels
             }
         }
 
-        //kopiowanie rezultatu do schowka
+        // Kopiowanie rezultatu do schowka
         [RelayCommand]
         private async Task CopyToClipboard()
         {

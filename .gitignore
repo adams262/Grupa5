@@ -1,8 +1,3 @@
-# Foldery generowane przez kompilator w każdym projekcie
+.vs
 **/bin/
 **/obj/
-
-# Ustawienia Visual Studio i pliki tymczasowe
-.vs/
-*.user
-*.userosscache
