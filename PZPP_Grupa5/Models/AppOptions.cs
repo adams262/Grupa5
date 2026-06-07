@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PZPP_Grupa5.Models
 {
-    internal class AppOptions
+    public class AppOptions
     {
     }
 }
