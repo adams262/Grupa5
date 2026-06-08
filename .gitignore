@@ -1,3 +1,8 @@
-/.vs
-/PZPP_Grupa5/obj
-/PZPP_Grupa5/bin
+# Foldery generowane przez kompilator w każdym projekcie
+**/bin/
+**/obj/
+
+# Ustawienia Visual Studio i pliki tymczasowe
+.vs/
+*.user
+*.userosscache

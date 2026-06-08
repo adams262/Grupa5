@@ -1,3 +1,5 @@
 <Solution>
-  <Project Path="PZPP_Grupa5/PZPP_Grupa5.csproj" />
+  <Project Path="PZPP_Grupa5/PZPP_Grupa5.csproj">
+    <Deploy Solution="Debug|*" />
+  </Project>
 </Solution>

@@ -1,25 +1,34 @@
 ﻿using PZPP_Grupa5.Models;
 using System.Net.Http.Json;
 using System.Text.Json;
-using System.Text; 
+using System.Text;
+using Microsoft.Maui.Storage; 
 
 namespace PZPP_Grupa5.Services
 {
     public class GeminiService : IGeminiService
     {
-        private readonly HttpClient _httpClient = new();
+        private readonly HttpClient _httpClient;
+        private readonly IPreferences _preferences;
+
+        
+        public GeminiService(HttpClient? httpClient = null, IPreferences? preferences = null)
+        {
+            _httpClient = httpClient ?? new HttpClient();
+            _preferences = preferences ?? Preferences.Default;
+        }
 
         public async Task<string> GetGeminiAsync(YouTubeDependency dane, bool streszczenie, bool wniosek, bool timestamps)
         {
-            // Pobranie klucza API z ustawień aplikacji
-            string apiKey = Preferences.Default.Get("GeminiApiKey", string.Empty);
+            
+            string apiKey = _preferences.Get("GeminiApiKey", string.Empty);
 
             if (string.IsNullOrWhiteSpace(apiKey))
                 throw new ApiKeyException();
 
             string url = $"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={apiKey}";
 
-            // budowanie promptu
+            // Budowanie promptu
             var promptBuilder = new StringBuilder();
             promptBuilder.AppendLine("Jesteś ekspertem od analizy treści. Twoim zadaniem jest przeanalizowanie dostarczonego materiału (transkrypcji lub audio) z YouTube.");
             promptBuilder.AppendLine("Odpowiadaj ZAWSZE w języku polskim.");
@@ -30,7 +39,8 @@ namespace PZPP_Grupa5.Services
             {
                 promptBuilder.AppendLine("## Skrócony opis");
                 promptBuilder.AppendLine("Napisz zwięzłe i konkretne streszczenie całego materiału.");
-                promptBuilder.AppendLine("WAŻNE: Po każdym punkcie (wniosku) dodaj jedną pustą linię odstępu, aby tekst był bardziej przejrzysty.");
+                promptBuilder.AppendLine("WAŻNE: Po każdym punkcie (wniosku) dodaj jedną pustą linię odstępu, " +
+                                            "aby tekst był bardziej przejrzysty.");
                 promptBuilder.AppendLine();
             }
 
@@ -53,7 +63,7 @@ namespace PZPP_Grupa5.Services
             string finalnyPrompt = promptBuilder.ToString();
 
             object payload;
-            // Pakowanie danych audio lub tekstowych
+
             if (dane.CzyTylkoAudio)
             {
                 var bajtyAudio = await File.ReadAllBytesAsync(dane.SciezkaAudio);
@@ -91,11 +101,11 @@ namespace PZPP_Grupa5.Services
                 };
             }
 
-            // Wysyłanie żądania do Gemini AI Studio
+            
             var odpowiedz = await _httpClient.PostAsJsonAsync(url, payload);
             var json = await odpowiedz.Content.ReadAsStringAsync();
-            
-            // obsługa błędów
+
+            // Obsługa błędów
             if (!odpowiedz.IsSuccessStatusCode)
             {
                 var errorJson = JsonDocument.Parse(json);
@@ -116,7 +126,7 @@ namespace PZPP_Grupa5.Services
                 throw new Exception(errorMessage);
             }
 
-            // parsowanie
+            // Parsowanie
             try
             {
                 using var doc = JsonDocument.Parse(json);

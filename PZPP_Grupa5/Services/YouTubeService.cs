@@ -35,7 +35,7 @@ namespace PZPP_Grupa5.Services
             var trackManifest = await _youtube.Videos.ClosedCaptions.GetManifestAsync(videoId);
             var trackInfo = trackManifest.TryGetByLanguage("pl") ?? trackManifest.Tracks.FirstOrDefault();
 
-            // Pobieramy napisy i zwracamy sam tekst, jesli sa dostepne
+            // transkrybcja
             if (trackInfo != null)
             {
                 var track = await _youtube.Videos.ClosedCaptions.GetAsync(trackInfo);
@@ -44,11 +44,11 @@ namespace PZPP_Grupa5.Services
                 return new YouTubeDependency { Tekst = pelnyTekst, CzyTylkoAudio = false };
             }
 
-            // Pobieramy plik audio
+            // Pobieranie pliku audio
             var streamManifest = await _youtube.Videos.Streams.GetManifestAsync(videoId);
             var audioStreamInfo = streamManifest.GetAudioOnlyStreams().GetWithHighestBitrate();
 
-            // Pobieramy i zapisujemy plik audio w katalogu tymczasowym
+            // zapisywanie pliku audio w temp
             var filePath = Path.Combine(FileSystem.CacheDirectory, $"{videoId}.mp4");
 
             await _youtube.Videos.Streams.DownloadAsync(audioStreamInfo, filePath);

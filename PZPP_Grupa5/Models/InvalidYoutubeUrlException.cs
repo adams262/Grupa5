@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PZPP_Grupa5.Models
 {
-    internal class InvalidYoutubeUrlException : Exception
+    public class InvalidYoutubeUrlException : Exception
     {
     }
 }
