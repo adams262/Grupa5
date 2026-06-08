@@ -106,7 +106,7 @@
 
                         <Button Text="PROCESS VIDEO" Command="{Binding ProcessVideoCommand}" Pressed="OnElementPressed" Released="OnElementReleased" BackgroundColor="#FF0000" TextColor="White" FontAttributes="Bold" CornerRadius="12" HeightRequest="60" WidthRequest="200" HorizontalOptions="Center">
                             <Button.GestureRecognizers>
-                                <PointerGestureRecognizer PointerEntered="OnPointerEntered" PointerExited="OnPointerExited" />
+                                
                             </Button.GestureRecognizers>
                         </Button>
                     </VerticalStackLayout>
@@ -182,7 +182,7 @@
 
                         <Button Text="BACK TO INPUT" Clicked="OnBackButtonClicked" Pressed="OnElementPressed" Released="OnElementReleased" BackgroundColor="#FF0000" TextColor="White" CornerRadius="12" HeightRequest="50">
                             <Button.GestureRecognizers>
-                                <PointerGestureRecognizer PointerEntered="OnPointerEntered" PointerExited="OnPointerExited" />
+                                
                             </Button.GestureRecognizers>
                         </Button>
                     </VerticalStackLayout>
