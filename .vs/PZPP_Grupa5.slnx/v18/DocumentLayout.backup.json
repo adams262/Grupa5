@@ -3,48 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\kozin\\Documents\\PTG projekty\\ZPP\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{46ED1477-80A9-8660-5BD3-8BFC9A5FA724}|PZPP_Grupa5\\PZPP_Grupa5.csproj|c:\\users\\kozin\\documents\\ptg projekty\\zpp\\pzpp_grupa5\\views\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{46ED1477-80A9-8660-5BD3-8BFC9A5FA724}|PZPP_Grupa5\\PZPP_Grupa5.csproj|solutionrelative:pzpp_grupa5\\views\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{46ED1477-80A9-8660-5BD3-8BFC9A5FA724}|PZPP_Grupa5\\PZPP_Grupa5.csproj|c:\\users\\kozin\\documents\\ptg projekty\\zpp\\pzpp_grupa5\\views\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{46ED1477-80A9-8660-5BD3-8BFC9A5FA724}|PZPP_Grupa5\\PZPP_Grupa5.csproj|solutionrelative:pzpp_grupa5\\views\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{46ED1477-80A9-8660-5BD3-8BFC9A5FA724}|PZPP_Grupa5\\PZPP_Grupa5.csproj|c:\\users\\kozin\\documents\\ptg projekty\\zpp\\pzpp_grupa5\\mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{46ED1477-80A9-8660-5BD3-8BFC9A5FA724}|PZPP_Grupa5\\PZPP_Grupa5.csproj|solutionrelative:pzpp_grupa5\\mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{46ED1477-80A9-8660-5BD3-8BFC9A5FA724}|PZPP_Grupa5\\PZPP_Grupa5.csproj|c:\\users\\kozin\\documents\\ptg projekty\\zpp\\pzpp_grupa5\\views\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{46ED1477-80A9-8660-5BD3-8BFC9A5FA724}|PZPP_Grupa5\\PZPP_Grupa5.csproj|solutionrelative:pzpp_grupa5\\views\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{46ED1477-80A9-8660-5BD3-8BFC9A5FA724}|PZPP_Grupa5\\PZPP_Grupa5.csproj|c:\\users\\kozin\\documents\\ptg projekty\\zpp\\pzpp_grupa5\\viewmodels\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{46ED1477-80A9-8660-5BD3-8BFC9A5FA724}|PZPP_Grupa5\\PZPP_Grupa5.csproj|solutionrelative:pzpp_grupa5\\viewmodels\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{46ED1477-80A9-8660-5BD3-8BFC9A5FA724}|PZPP_Grupa5\\PZPP_Grupa5.csproj|c:\\users\\kozin\\documents\\ptg projekty\\zpp\\pzpp_grupa5\\platforms\\android\\mainactivity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{46ED1477-80A9-8660-5BD3-8BFC9A5FA724}|PZPP_Grupa5\\PZPP_Grupa5.csproj|solutionrelative:pzpp_grupa5\\platforms\\android\\mainactivity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{46ED1477-80A9-8660-5BD3-8BFC9A5FA724}|PZPP_Grupa5\\PZPP_Grupa5.csproj|c:\\users\\kozin\\documents\\ptg projekty\\zpp\\pzpp_grupa5\\platforms\\android\\mainapplication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{46ED1477-80A9-8660-5BD3-8BFC9A5FA724}|PZPP_Grupa5\\PZPP_Grupa5.csproj|solutionrelative:pzpp_grupa5\\platforms\\android\\mainapplication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{46ED1477-80A9-8660-5BD3-8BFC9A5FA724}|PZPP_Grupa5\\PZPP_Grupa5.csproj|c:\\users\\kozin\\documents\\ptg projekty\\zpp\\pzpp_grupa5\\models\\youtubedependency.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{46ED1477-80A9-8660-5BD3-8BFC9A5FA724}|PZPP_Grupa5\\PZPP_Grupa5.csproj|solutionrelative:pzpp_grupa5\\models\\youtubedependency.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{46ED1477-80A9-8660-5BD3-8BFC9A5FA724}|PZPP_Grupa5\\PZPP_Grupa5.csproj|c:\\users\\kozin\\documents\\ptg projekty\\zpp\\pzpp_grupa5\\models\\quotaexceededexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{46ED1477-80A9-8660-5BD3-8BFC9A5FA724}|PZPP_Grupa5\\PZPP_Grupa5.csproj|solutionrelative:pzpp_grupa5\\models\\quotaexceededexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{46ED1477-80A9-8660-5BD3-8BFC9A5FA724}|PZPP_Grupa5\\PZPP_Grupa5.csproj|c:\\users\\kozin\\documents\\ptg projekty\\zpp\\pzpp_grupa5\\models\\invalidyoutubeurlexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{46ED1477-80A9-8660-5BD3-8BFC9A5FA724}|PZPP_Grupa5\\PZPP_Grupa5.csproj|solutionrelative:pzpp_grupa5\\models\\invalidyoutubeurlexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{46ED1477-80A9-8660-5BD3-8BFC9A5FA724}|PZPP_Grupa5\\PZPP_Grupa5.csproj|c:\\users\\kozin\\documents\\ptg projekty\\zpp\\pzpp_grupa5\\models\\appoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{46ED1477-80A9-8660-5BD3-8BFC9A5FA724}|PZPP_Grupa5\\PZPP_Grupa5.csproj|solutionrelative:pzpp_grupa5\\models\\appoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{46ED1477-80A9-8660-5BD3-8BFC9A5FA724}|PZPP_Grupa5\\PZPP_Grupa5.csproj|c:\\users\\kozin\\documents\\ptg projekty\\zpp\\pzpp_grupa5\\models\\apikeyexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{46ED1477-80A9-8660-5BD3-8BFC9A5FA724}|PZPP_Grupa5\\PZPP_Grupa5.csproj|solutionrelative:pzpp_grupa5\\models\\apikeyexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{46ED1477-80A9-8660-5BD3-8BFC9A5FA724}|PZPP_Grupa5\\PZPP_Grupa5.csproj|c:\\users\\kozin\\documents\\ptg projekty\\zpp\\pzpp_grupa5\\views\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{46ED1477-80A9-8660-5BD3-8BFC9A5FA724}|PZPP_Grupa5\\PZPP_Grupa5.csproj|solutionrelative:pzpp_grupa5\\views\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -54,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
@@ -64,7 +36,7 @@
               "RelativeDocumentMoniker": "PZPP_Grupa5\\MauiProgram.cs",
               "ToolTip": "C:\\Users\\kozin\\Documents\\PTG projekty\\ZPP\\PZPP_Grupa5\\MauiProgram.cs",
               "RelativeToolTip": "PZPP_Grupa5\\MauiProgram.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAABaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-07T17:23:42.731Z",
               "IsPinned": true,
@@ -72,132 +44,41 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
+              "Title": "MainPage.xaml",
+              "DocumentMoniker": "C:\\Users\\kozin\\Documents\\PTG projekty\\ZPP\\PZPP_Grupa5\\Views\\MainPage.xaml",
+              "RelativeDocumentMoniker": "PZPP_Grupa5\\Views\\MainPage.xaml",
+              "ToolTip": "C:\\Users\\kozin\\Documents\\PTG projekty\\ZPP\\PZPP_Grupa5\\Views\\MainPage.xaml",
+              "RelativeToolTip": "PZPP_Grupa5\\Views\\MainPage.xaml",
+              "ViewState": "AgIAAGsAAAAAAAAAAAAQwH4AAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-06-07T21:21:55.367Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "MainViewModel.cs",
               "DocumentMoniker": "C:\\Users\\kozin\\Documents\\PTG projekty\\ZPP\\PZPP_Grupa5\\ViewModels\\MainViewModel.cs",
               "RelativeDocumentMoniker": "PZPP_Grupa5\\ViewModels\\MainViewModel.cs",
               "ToolTip": "C:\\Users\\kozin\\Documents\\PTG projekty\\ZPP\\PZPP_Grupa5\\ViewModels\\MainViewModel.cs",
               "RelativeToolTip": "PZPP_Grupa5\\ViewModels\\MainViewModel.cs",
-              "ViewState": "AgIAAPwAAAAAAAAAAAAIwD4BAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAPEAAAAAAAAAAADwvz4BAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-07T21:19:37.013Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "MainPage.xaml.cs",
               "DocumentMoniker": "C:\\Users\\kozin\\Documents\\PTG projekty\\ZPP\\PZPP_Grupa5\\Views\\MainPage.xaml.cs",
               "RelativeDocumentMoniker": "PZPP_Grupa5\\Views\\MainPage.xaml.cs",
               "ToolTip": "C:\\Users\\kozin\\Documents\\PTG projekty\\ZPP\\PZPP_Grupa5\\Views\\MainPage.xaml.cs",
               "RelativeToolTip": "PZPP_Grupa5\\Views\\MainPage.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAKAAAAAAAAAA==",
+              "ViewState": "AgIAAFIAAAAAAAAAAADwv3MAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-07T21:52:29.329Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "MainActivity.cs",
-              "DocumentMoniker": "C:\\Users\\kozin\\Documents\\PTG projekty\\ZPP\\PZPP_Grupa5\\Platforms\\Android\\MainActivity.cs",
-              "RelativeDocumentMoniker": "PZPP_Grupa5\\Platforms\\Android\\MainActivity.cs",
-              "ToolTip": "C:\\Users\\kozin\\Documents\\PTG projekty\\ZPP\\PZPP_Grupa5\\Platforms\\Android\\MainActivity.cs",
-              "RelativeToolTip": "PZPP_Grupa5\\Platforms\\Android\\MainActivity.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-07T21:55:45.946Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "MainApplication.cs",
-              "DocumentMoniker": "C:\\Users\\kozin\\Documents\\PTG projekty\\ZPP\\PZPP_Grupa5\\Platforms\\Android\\MainApplication.cs",
-              "RelativeDocumentMoniker": "PZPP_Grupa5\\Platforms\\Android\\MainApplication.cs",
-              "ToolTip": "C:\\Users\\kozin\\Documents\\PTG projekty\\ZPP\\PZPP_Grupa5\\Platforms\\Android\\MainApplication.cs",
-              "RelativeToolTip": "PZPP_Grupa5\\Platforms\\Android\\MainApplication.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-07T21:55:45.052Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "YouTubeDependency.cs",
-              "DocumentMoniker": "C:\\Users\\kozin\\Documents\\PTG projekty\\ZPP\\PZPP_Grupa5\\Models\\YouTubeDependency.cs",
-              "RelativeDocumentMoniker": "PZPP_Grupa5\\Models\\YouTubeDependency.cs",
-              "ToolTip": "C:\\Users\\kozin\\Documents\\PTG projekty\\ZPP\\PZPP_Grupa5\\Models\\YouTubeDependency.cs",
-              "RelativeToolTip": "PZPP_Grupa5\\Models\\YouTubeDependency.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-07T21:55:40.373Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "QuotaExceededException.cs",
-              "DocumentMoniker": "C:\\Users\\kozin\\Documents\\PTG projekty\\ZPP\\PZPP_Grupa5\\Models\\QuotaExceededException.cs",
-              "RelativeDocumentMoniker": "PZPP_Grupa5\\Models\\QuotaExceededException.cs",
-              "ToolTip": "C:\\Users\\kozin\\Documents\\PTG projekty\\ZPP\\PZPP_Grupa5\\Models\\QuotaExceededException.cs",
-              "RelativeToolTip": "PZPP_Grupa5\\Models\\QuotaExceededException.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-07T21:55:38.077Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "InvalidYoutubeUrlException.cs",
-              "DocumentMoniker": "C:\\Users\\kozin\\Documents\\PTG projekty\\ZPP\\PZPP_Grupa5\\Models\\InvalidYoutubeUrlException.cs",
-              "RelativeDocumentMoniker": "PZPP_Grupa5\\Models\\InvalidYoutubeUrlException.cs",
-              "ToolTip": "C:\\Users\\kozin\\Documents\\PTG projekty\\ZPP\\PZPP_Grupa5\\Models\\InvalidYoutubeUrlException.cs",
-              "RelativeToolTip": "PZPP_Grupa5\\Models\\InvalidYoutubeUrlException.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-07T21:55:37.21Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "AppOptions.cs",
-              "DocumentMoniker": "C:\\Users\\kozin\\Documents\\PTG projekty\\ZPP\\PZPP_Grupa5\\Models\\AppOptions.cs",
-              "RelativeDocumentMoniker": "PZPP_Grupa5\\Models\\AppOptions.cs",
-              "ToolTip": "C:\\Users\\kozin\\Documents\\PTG projekty\\ZPP\\PZPP_Grupa5\\Models\\AppOptions.cs",
-              "RelativeToolTip": "PZPP_Grupa5\\Models\\AppOptions.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-07T21:55:36.28Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "ApiKeyException.cs",
-              "DocumentMoniker": "C:\\Users\\kozin\\Documents\\PTG projekty\\ZPP\\PZPP_Grupa5\\Models\\ApiKeyException.cs",
-              "RelativeDocumentMoniker": "PZPP_Grupa5\\Models\\ApiKeyException.cs",
-              "ToolTip": "C:\\Users\\kozin\\Documents\\PTG projekty\\ZPP\\PZPP_Grupa5\\Models\\ApiKeyException.cs",
-              "RelativeToolTip": "PZPP_Grupa5\\Models\\ApiKeyException.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-07T21:55:35.129Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "MainPage.xaml",
-              "DocumentMoniker": "C:\\Users\\kozin\\Documents\\PTG projekty\\ZPP\\PZPP_Grupa5\\Views\\MainPage.xaml",
-              "RelativeDocumentMoniker": "PZPP_Grupa5\\Views\\MainPage.xaml",
-              "ToolTip": "C:\\Users\\kozin\\Documents\\PTG projekty\\ZPP\\PZPP_Grupa5\\Views\\MainPage.xaml",
-              "RelativeToolTip": "PZPP_Grupa5\\Views\\MainPage.xaml",
-              "ViewState": "AgIAAHgAAAAAAAAAAAAAABgAAAAcAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-06-07T21:21:55.367Z",
               "EditorCaption": ""
             }
           ]

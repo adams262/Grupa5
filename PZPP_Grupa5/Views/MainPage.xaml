@@ -42,7 +42,7 @@
                     <Border.GestureRecognizers>
                         <PointerGestureRecognizer PointerEntered="OnPointerEntered" PointerExited="OnPointerExited" />
                     </Border.GestureRecognizers>
-                    <Button Clicked="OnHamburgerClicked" Pressed="OnElementPressed" Released="OnElementReleased" Text="&#xf0c9;" FontFamily="FontAwesomeSolid" TextColor="#FF0000" FontSize="20" BackgroundColor="Transparent" BorderWidth="0" Padding="0" Margin="0" />
+                    <Button Clicked="OnHamburgerClicked" Pressed="OnElementPressed" Released="OnElementReleased" Text="&#xf0c9;" FontFamily="Font Awesome 7 Free" TextColor="#FF0000" FontSize="20" BackgroundColor="Transparent" BorderWidth="0" Padding="0" Margin="0" />
                 </Border>
 
                 <Border StrokeShape="RoundRectangle 8" StrokeThickness="0" BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#2A2A2A}" HorizontalOptions="End" WidthRequest="40" HeightRequest="40" Padding="0">
@@ -52,14 +52,23 @@
                     <Border.GestureRecognizers>
                         <PointerGestureRecognizer PointerEntered="OnPointerEntered" PointerExited="OnPointerExited" />
                     </Border.GestureRecognizers>
-                    <Button Command="{Binding ToggleThemeCommand}" Pressed="OnElementPressed" Released="OnElementReleased" Text="{Binding ThemeIcon}" FontFamily="FontAwesomeSolid" TextColor="#FF0000" FontSize="20" BackgroundColor="Transparent" BorderWidth="0" Padding="0" Margin="0" />
+                    <Button Command="{Binding ToggleThemeCommand}" Pressed="OnElementPressed" Released="OnElementReleased" Text="{Binding ThemeIcon}" FontFamily="Font Awesome 7 Free" TextColor="#FF0000" FontSize="20" BackgroundColor="Transparent" BorderWidth="0" Padding="0" Margin="0" />
                 </Border>
             </Grid>
 
             <Grid Grid.Row="1">
                 <ScrollView x:Name="InputView" IsVisible="{Binding IsInputVisible} " ZIndex="0">
                     <VerticalStackLayout Padding="25" Spacing="25" HorizontalOptions="Fill" MaximumWidthRequest="500">
-                        <Label Text="AI-NALISER" FontSize="32" FontAttributes="Bold" TextColor="#FF0000" HorizontalOptions="Center" Margin="0,30,0,10"/>
+                        <Image Source="logotyp.png" 
+HeightRequest="185" 
+Aspect="AspectFit" >
+                            <Image.Shadow>
+                                <Shadow Brush="#02102b" 
+     Offset="0, 8" 
+     Radius="15" 
+     Opacity="0.4" />
+                            </Image.Shadow>
+                        </Image>
 
                         <Border StrokeShape="RoundRectangle 12" StrokeThickness="2" BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#212121}" Padding="20">
                             <Border.GestureRecognizers>
@@ -104,8 +113,18 @@
                             </VerticalStackLayout>
                         </Border>
 
-                        <Button Text="PROCESS VIDEO" Command="{Binding ProcessVideoCommand}" Pressed="OnElementPressed" Released="OnElementReleased" BackgroundColor="#FF0000" TextColor="White" FontAttributes="Bold" CornerRadius="12" HeightRequest="60" WidthRequest="200" HorizontalOptions="Center">
-                        </Button>
+                        <Button Text="PROCESS VIDEO" 
+        Command="{Binding ProcessVideoCommand}" 
+        Clicked="OnProcessVideoClicked"
+        Pressed="OnElementPressed" 
+        Released="OnElementReleased" 
+        BackgroundColor="#FF0000" 
+        TextColor="White" 
+        FontAttributes="Bold" 
+        CornerRadius="12" 
+        HeightRequest="60" 
+        WidthRequest="200" 
+        HorizontalOptions="Center" />
                     </VerticalStackLayout>
                 </ScrollView>
 
@@ -157,7 +176,7 @@
                                             <Border.GestureRecognizers>
                                                 <PointerGestureRecognizer PointerEntered="OnPointerEntered" PointerExited="OnPointerExited" />
                                             </Border.GestureRecognizers>
-                                            <Button Command="{Binding SaveToFileCommand}" Pressed="OnElementPressed" Released="OnElementReleased" Text="&#xf019;" FontFamily="FontAwesomeSolid" TextColor="#FF0000" FontSize="16" BackgroundColor="Transparent" BorderWidth="0" Padding="0" Margin="0" />
+                                            <Button Command="{Binding SaveToFileCommand}" Pressed="OnElementPressed" Released="OnElementReleased" Text="&#xf019;" FontFamily="Font Awesome 7 Free" TextColor="#FF0000" FontSize="16" BackgroundColor="Transparent" BorderWidth="0" Padding="0" Margin="0" />
                                         </Border>
 
                                         <Border StrokeShape="RoundRectangle 8" StrokeThickness="0" BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#333333}" WidthRequest="36" HeightRequest="36" Padding="0">
@@ -167,13 +186,15 @@
                                             <Border.GestureRecognizers>
                                                 <PointerGestureRecognizer PointerEntered="OnPointerEntered" PointerExited="OnPointerExited" />
                                             </Border.GestureRecognizers>
-                                            <Button Command="{Binding CopyToClipboardCommand}" Pressed="OnElementPressed" Released="OnElementReleased" Text="&#xf0c5;" FontFamily="FontAwesomeSolid" TextColor="#FF0000" FontSize="16" BackgroundColor="Transparent" BorderWidth="0" Padding="0" Margin="0" />
+                                            <Button Command="{Binding CopyToClipboardCommand}" Pressed="OnElementPressed" Released="OnElementReleased" Text="&#xf0c5;" FontFamily="Font Awesome 7 Free" TextColor="#FF0000" FontSize="16" BackgroundColor="Transparent" BorderWidth="0" Padding="0" Margin="0" />
                                         </Border>
                                     </HorizontalStackLayout>
                                 </Grid>
-                                <ScrollView HeightRequest="300" Padding="15">
-                                    <Label Text="{Binding TekstWynikowy}" TextColor="{AppThemeBinding Light=Black, Dark=White}" LineHeight="1.4" />
-                                </ScrollView>
+                                <VerticalStackLayout Padding="15">
+                                    <Label Text="{Binding TekstWynikowy}" 
+           TextColor="{AppThemeBinding Light=Black, Dark=White}" 
+           LineHeight="1.4" />
+                                </VerticalStackLayout>
                             </VerticalStackLayout>
                         </Border>
 
@@ -201,7 +222,7 @@
                         <Border.GestureRecognizers>
                             <PointerGestureRecognizer PointerEntered="OnPointerEntered" PointerExited="OnPointerExited" />
                         </Border.GestureRecognizers>
-                        <Button Clicked="OnOverlayTapped" Pressed="OnElementPressed" Released="OnElementReleased" Text="&#xf060;" FontFamily="FontAwesomeSolid" TextColor="#FF0000" FontSize="20" BackgroundColor="Transparent" BorderWidth="0" Padding="0" Margin="0" />
+                        <Button Clicked="OnOverlayTapped" Pressed="OnElementPressed" Released="OnElementReleased" Text="&#xf060;" FontFamily="Font Awesome 7 Free" TextColor="#FF0000" FontSize="20" BackgroundColor="Transparent" BorderWidth="0" Padding="0" Margin="0" />
                     </Border>
 
                     <Border Grid.Row="2" StrokeShape="RoundRectangle 12" StrokeThickness="2" BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#2A2A2A}" Padding="15" Margin="5,0,5,25">
@@ -253,7 +274,7 @@
         Pressed="OnElementPressed"
         Released="OnElementReleased"
         Text="&#xf1f8;" 
-        FontFamily="FontAwesomeSolid" 
+        FontFamily="Font Awesome 7 Free" 
         TextColor="#FF0000" 
         FontSize="18" 
         BackgroundColor="Transparent" 

@@ -114,4 +114,10 @@ public partial class MainPage : ContentPage
             }
         }
     }
+
+    private void OnProcessVideoClicked(object sender, EventArgs e)
+    {
+        ResultView.Opacity = 1;
+        ResultView.TranslationY = 0;
+    }
 }
