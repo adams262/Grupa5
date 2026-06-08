@@ -39,7 +39,8 @@ namespace PZPP_Grupa5.Services
             {
                 promptBuilder.AppendLine("## Skrócony opis");
                 promptBuilder.AppendLine("Napisz zwięzłe i konkretne streszczenie całego materiału.");
-                promptBuilder.AppendLine("WAŻNE: Po każdym punkcie (wniosku) dodaj jedną pustą linię odstępu, aby tekst był bardziej przejrzysty.");
+                promptBuilder.AppendLine("WAŻNE: Po każdym punkcie (wniosku) dodaj jedną pustą linię odstępu, " +
+                                            "aby tekst był bardziej przejrzysty.");
                 promptBuilder.AppendLine();
             }
 

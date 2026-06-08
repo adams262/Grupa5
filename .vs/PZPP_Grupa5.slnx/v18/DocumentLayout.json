@@ -3,8 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\kozin\\Documents\\PTG projekty\\ZPP\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{46ED1477-80A9-8660-5BD3-8BFC9A5FA724}|PZPP_Grupa5\\PZPP_Grupa5.csproj|c:\\users\\kozin\\documents\\ptg projekty\\zpp\\pzpp_grupa5\\pzpp_grupa5.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{46ED1477-80A9-8660-5BD3-8BFC9A5FA724}|PZPP_Grupa5\\PZPP_Grupa5.csproj|solutionrelative:pzpp_grupa5\\pzpp_grupa5.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{46ED1477-80A9-8660-5BD3-8BFC9A5FA724}|PZPP_Grupa5\\PZPP_Grupa5.csproj|c:\\users\\kozin\\documents\\ptg projekty\\zpp\\pzpp_grupa5\\views\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{46ED1477-80A9-8660-5BD3-8BFC9A5FA724}|PZPP_Grupa5\\PZPP_Grupa5.csproj|solutionrelative:pzpp_grupa5\\views\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{46ED1477-80A9-8660-5BD3-8BFC9A5FA724}|PZPP_Grupa5\\PZPP_Grupa5.csproj|c:\\users\\kozin\\documents\\ptg projekty\\zpp\\pzpp_grupa5\\services\\geminiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{46ED1477-80A9-8660-5BD3-8BFC9A5FA724}|PZPP_Grupa5\\PZPP_Grupa5.csproj|solutionrelative:pzpp_grupa5\\services\\geminiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{46ED1477-80A9-8660-5BD3-8BFC9A5FA724}|PZPP_Grupa5\\PZPP_Grupa5.csproj|c:\\users\\kozin\\documents\\ptg projekty\\zpp\\pzpp_grupa5\\views\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
@@ -15,8 +19,8 @@
       "RelativeMoniker": "D:0:0:{46ED1477-80A9-8660-5BD3-8BFC9A5FA724}|PZPP_Grupa5\\PZPP_Grupa5.csproj|solutionrelative:pzpp_grupa5\\mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{46ED1477-80A9-8660-5BD3-8BFC9A5FA724}|PZPP_Grupa5\\PZPP_Grupa5.csproj|c:\\users\\kozin\\documents\\ptg projekty\\zpp\\pzpp_grupa5\\views\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{46ED1477-80A9-8660-5BD3-8BFC9A5FA724}|PZPP_Grupa5\\PZPP_Grupa5.csproj|solutionrelative:pzpp_grupa5\\views\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{46ED1477-80A9-8660-5BD3-8BFC9A5FA724}|PZPP_Grupa5\\PZPP_Grupa5.csproj|c:\\users\\kozin\\documents\\ptg projekty\\zpp\\pzpp_grupa5\\pzpp_grupa5.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{46ED1477-80A9-8660-5BD3-8BFC9A5FA724}|PZPP_Grupa5\\PZPP_Grupa5.csproj|solutionrelative:pzpp_grupa5\\pzpp_grupa5.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{46ED1477-80A9-8660-5BD3-8BFC9A5FA724}|PZPP_Grupa5\\PZPP_Grupa5.csproj|c:\\users\\kozin\\documents\\ptg projekty\\zpp\\pzpp_grupa5\\viewmodels\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -30,17 +34,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "MauiProgram.cs",
               "DocumentMoniker": "C:\\Users\\kozin\\Documents\\PTG projekty\\ZPP\\PZPP_Grupa5\\MauiProgram.cs",
               "RelativeDocumentMoniker": "PZPP_Grupa5\\MauiProgram.cs",
               "ToolTip": "C:\\Users\\kozin\\Documents\\PTG projekty\\ZPP\\PZPP_Grupa5\\MauiProgram.cs",
               "RelativeToolTip": "PZPP_Grupa5\\MauiProgram.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAABaAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAwAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-07T17:23:42.731Z",
               "IsPinned": true,
@@ -48,54 +52,67 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "PZPP_Grupa5",
+              "DocumentIndex": 1,
+              "Title": "GeminiService.cs",
+              "DocumentMoniker": "C:\\Users\\kozin\\Documents\\PTG projekty\\ZPP\\PZPP_Grupa5\\Services\\GeminiService.cs",
+              "RelativeDocumentMoniker": "PZPP_Grupa5\\Services\\GeminiService.cs",
+              "ToolTip": "C:\\Users\\kozin\\Documents\\PTG projekty\\ZPP\\PZPP_Grupa5\\Services\\GeminiService.cs",
+              "RelativeToolTip": "PZPP_Grupa5\\Services\\GeminiService.cs",
+              "ViewState": "AgIAAGMAAAAAAAAAAAAYwDAAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-08T10:14:10.605Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "PZPP_Grupa5.csproj",
               "DocumentMoniker": "C:\\Users\\kozin\\Documents\\PTG projekty\\ZPP\\PZPP_Grupa5\\PZPP_Grupa5.csproj",
               "RelativeDocumentMoniker": "PZPP_Grupa5\\PZPP_Grupa5.csproj",
               "ToolTip": "C:\\Users\\kozin\\Documents\\PTG projekty\\ZPP\\PZPP_Grupa5\\PZPP_Grupa5.csproj",
               "RelativeToolTip": "PZPP_Grupa5\\PZPP_Grupa5.csproj",
-              "ViewState": "AgIAABEAAAAAAAAAAAAwwBsAAAAwAAAAAAAAAA==",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAACIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
               "WhenOpened": "2026-06-08T08:56:46.085Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "MainPage.xaml",
               "DocumentMoniker": "C:\\Users\\kozin\\Documents\\PTG projekty\\ZPP\\PZPP_Grupa5\\Views\\MainPage.xaml",
               "RelativeDocumentMoniker": "PZPP_Grupa5\\Views\\MainPage.xaml",
               "ToolTip": "C:\\Users\\kozin\\Documents\\PTG projekty\\ZPP\\PZPP_Grupa5\\Views\\MainPage.xaml",
               "RelativeToolTip": "PZPP_Grupa5\\Views\\MainPage.xaml",
-              "ViewState": "AgIAAGsAAAAAAAAAAAAQwH4AAAAlAAAAAAAAAA==",
+              "ViewState": "AgIAAFMAAAAAAAAAAAAQwKoAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2026-06-07T21:21:55.367Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "MainViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\kozin\\Documents\\PTG projekty\\ZPP\\PZPP_Grupa5\\ViewModels\\MainViewModel.cs",
-              "RelativeDocumentMoniker": "PZPP_Grupa5\\ViewModels\\MainViewModel.cs",
-              "ToolTip": "C:\\Users\\kozin\\Documents\\PTG projekty\\ZPP\\PZPP_Grupa5\\ViewModels\\MainViewModel.cs",
-              "RelativeToolTip": "PZPP_Grupa5\\ViewModels\\MainViewModel.cs",
-              "ViewState": "AgIAAPEAAAAAAAAAAADwvz4BAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-07T21:19:37.013Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "MainPage.xaml.cs",
               "DocumentMoniker": "C:\\Users\\kozin\\Documents\\PTG projekty\\ZPP\\PZPP_Grupa5\\Views\\MainPage.xaml.cs",
               "RelativeDocumentMoniker": "PZPP_Grupa5\\Views\\MainPage.xaml.cs",
               "ToolTip": "C:\\Users\\kozin\\Documents\\PTG projekty\\ZPP\\PZPP_Grupa5\\Views\\MainPage.xaml.cs",
               "RelativeToolTip": "PZPP_Grupa5\\Views\\MainPage.xaml.cs",
-              "ViewState": "AgIAAFIAAAAAAAAAAADwv3MAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAFgAAAAAAAAAAAAAAFYAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-07T21:52:29.329Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "MainViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\kozin\\Documents\\PTG projekty\\ZPP\\PZPP_Grupa5\\ViewModels\\MainViewModel.cs",
+              "RelativeDocumentMoniker": "PZPP_Grupa5\\ViewModels\\MainViewModel.cs",
+              "ToolTip": "C:\\Users\\kozin\\Documents\\PTG projekty\\ZPP\\PZPP_Grupa5\\ViewModels\\MainViewModel.cs",
+              "RelativeToolTip": "PZPP_Grupa5\\ViewModels\\MainViewModel.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAmwOEAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-07T21:19:37.013Z",
               "EditorCaption": ""
             }
           ]

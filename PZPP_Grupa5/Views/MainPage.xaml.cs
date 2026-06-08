@@ -90,7 +90,8 @@ public partial class MainPage : ContentPage
 
     private async void OnHistoryItemTapped(object sender, TappedEventArgs e)
     {
-        if (sender is BindableObject clickedElement && clickedElement.BindingContext is Models.ChatHistoryItem historyItem)
+        if (sender is BindableObject clickedElement && clickedElement.BindingContext 
+            is Models.ChatHistoryItem historyItem)
         {
             OnOverlayTapped(sender, e);
 
